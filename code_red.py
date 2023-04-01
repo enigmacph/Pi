@@ -13,4 +13,7 @@ hallway.join(master)
 def start_code_red():
     master.play_uri("http://192.168.50.252/etminut.mp3")
 
-start_code_red()
+# Run the script indefinitely, calling start_code_red() every minute
+while True:
+    start_code_red()
+    time.sleep(60)
