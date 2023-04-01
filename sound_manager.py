@@ -7,19 +7,20 @@ bedroom = soco.SoCo('192.168.50.82')
 hallway = soco.SoCo('192.168.50.33')
 
 # start 'code red' sequence on the group
-def gas():
+def play_sound(filename):
     # Create a new group with den as the coordinator
     master = den
     bedroom.join(master)
     hallway.join(master)
     
     # play alarm sound
-    master.play_uri("http://192.168.50.252/gas.mp3")
+    master.play_uri(f"http://192.168.50.252/{filename}.mp3")
 
-# Schedule start_code_red() to run at a certain time every day
-schedule.every().day.at("11:00").do(gas)
+# Schedule sounds
+schedule.every().day.at("18:00").do(play_sound("pizza_jingle"))
+schedule.every().day.at("11:00").do(play_sound("gas"))
 
-# Run the script indefinitely, calling start_code_red() every minute
+# Run the script indefinitely looking for scheduled sounds
 while True:
     schedule.run_pending()
     time.sleep(60)
