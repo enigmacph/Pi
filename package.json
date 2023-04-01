@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@tuya/tuya-connector-nodejs": "^2.1.2",
+    "discord": "^0.8.2",
+    "openai": "^3.2.1",
+    "tuyapi": "github:codetheweb/tuyapi"
+  }
+}
