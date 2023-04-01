@@ -17,4 +17,4 @@ def start_code_red():
 # Run the script indefinitely, calling start_code_red() every minute
 while True:
     start_code_red()
-    time.sleep(60)
+    time.sleep(10)
