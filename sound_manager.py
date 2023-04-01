@@ -17,8 +17,8 @@ def play_sound(filename):
     master.play_uri(f"http://192.168.50.252/{filename}.mp3")
 
 # Schedule sounds
-schedule.every().day.at("18:00").do(play_sound("pizza_jingle"))
-schedule.every().day.at("11:00").do(play_sound("gas"))
+schedule.every().day.at("18:00").do(lambda: play_sound("pizzajingle"))
+schedule.every().day.at("11:00").do(lambda: play_sound("gas"))
 
 # Run the script indefinitely looking for scheduled sounds
 while True:
