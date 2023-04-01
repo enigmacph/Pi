@@ -6,10 +6,12 @@
   "dependencies": {
     "electron": "^23.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "socket.io": "^4.6.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "node main.js"
   },
   "author": "",
   "license": "ISC"
