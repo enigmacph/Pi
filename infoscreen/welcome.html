@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to EnigmA</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    socket.on('updateContent', (newContent) => {
+      document.getElementById('content').innerHTML = newContent;
+    });
+  </script>
+</head>
+<body>
+  <h1>Welcome to EnigmA</h1>
+  <div id="content">
+    <!-- Content will be updated here -->
+  </div>
+</body>
+</html>
