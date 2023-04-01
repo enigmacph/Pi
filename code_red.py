@@ -1,4 +1,5 @@
 import soco
+import time
 
 den = soco.SoCo('192.168.50.198')
 bedroom = soco.SoCo('192.168.50.82')
