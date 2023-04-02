@@ -56,9 +56,8 @@ io.on('connection', (socket) => {
 
   setInterval(async () => {
     try {
-        const nextHtmlFile = await getNextHtmlFile(path.join(__dirname, 'HTML'));
-
-
+      const nextHtmlFile = await getNextHtmlFile(path.join(__dirname, 'HTML'));
+  
       fs.readFile(nextHtmlFile, (err, data) => {
         if (err) {
           console.error('Error reading next HTML file:', err);
@@ -69,12 +68,7 @@ io.on('connection', (socket) => {
     } catch (err) {
       console.error('Error getting next HTML file:', err);
     }
-  }, 5 * 60 * 10); // Update every 5 minutes
-
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
-  });
-});
+  }, 5 * 60 * 1000); // Update every 5 minutes
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
