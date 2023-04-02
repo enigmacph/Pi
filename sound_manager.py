@@ -19,6 +19,7 @@ def play_sound(filename):
 # Schedule sounds
 schedule.every().day.at("18:00").do(lambda: play_sound("pizzajingle"))
 schedule.every().day.at("11:00").do(lambda: play_sound("gas"))
+schedule.every().day.at("11:13").do(lambda: play_sound("gas"))
 
 # Run the script indefinitely looking for scheduled sounds
 while True:
