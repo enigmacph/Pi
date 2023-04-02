@@ -11,8 +11,11 @@ def play_sound(filename):
     # Create a new group with den as the coordinator
     try:
         master = den
+        den.volume=40
         bedroom.join(master)
+        bedroom.volume=40
         hallway.join(master)
+        hallway.volume=40
     except:
         print("Error joining speakers")
     
