@@ -1,0 +1,92 @@
+{
+    "timestamp": 1680392425.766711,
+    "devices": [
+        {
+            "id": "bfcfd63b955077f2616mqc",
+            "ip": "192.168.50.168",
+            "uuid": "0b473fe710f158d0",
+            "active": 2,
+            "ablilty": 0,
+            "encrypt": true,
+            "productKey": "key8u54q9dtru5jw",
+            "token": true,
+            "wf_cfg": true,
+            "clientLink": 3,
+            "name": "",
+            "key": "",
+            "mac": "",
+            "dev_type": "default",
+            "origin": "broadcast",
+            "ver": "3.5"
+        },
+        {
+            "id": "bf14d5aed474c2ef8bopuj",
+            "ip": "192.168.50.215",
+            "uuid": "3ade695d6f439974",
+            "active": 2,
+            "ablilty": 0,
+            "encrypt": true,
+            "productKey": "key8u54q9dtru5jw",
+            "token": true,
+            "wf_cfg": true,
+            "clientLink": 3,
+            "name": "",
+            "key": "",
+            "mac": "",
+            "dev_type": "default",
+            "origin": "broadcast",
+            "ver": "3.5"
+        },
+        {
+            "id": "bf4c1f56e1fadaf09cyoaw",
+            "ip": "192.168.50.220",
+            "uuid": "bd640a174493c767",
+            "active": 2,
+            "ablilty": 0,
+            "encrypt": true,
+            "productKey": "key8u54q9dtru5jw",
+            "token": true,
+            "wf_cfg": true,
+            "clientLink": 3,
+            "name": "",
+            "key": "",
+            "mac": "",
+            "dev_type": "default",
+            "origin": "broadcast",
+            "ver": "3.5"
+        },
+        {
+            "id": "bfb6ff03b19e1c1090v3fm",
+            "ip": "192.168.50.18",
+            "uuid": "2308ce666970c298",
+            "active": 2,
+            "ablilty": 0,
+            "encrypt": true,
+            "productKey": "key8u54q9dtru5jw",
+            "token": true,
+            "wf_cfg": true,
+            "clientLink": 3,
+            "name": "Esbens",
+            "key": "7241b40e71b2ae89",
+            "mac": "a0:92:08:05:54:c5",
+            "dev_type": "default",
+            "err": "",
+            "type": "default",
+            "dps": {
+                "dps": {
+                    "20": false,
+                    "21": "scene",
+                    "22": 1000,
+                    "23": 200,
+                    "24": "006e03e803e8",
+                    "25": "07464602000003e803e800000000464602007803e803e80000000046460200f003e803e800000000464602003d03e803e80000000046460200ae03e803e800000000464602011303e803e800000000",
+                    "26": 0,
+                    "34": false,
+                    "41": true
+                }
+            },
+            "origin": "broadcast",
+            "ver": "3.5"
+        }
+    ]
+}

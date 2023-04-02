@@ -1,0 +1,396 @@
+{
+    "result": [
+        {
+            "active_time": 1674474355,
+            "biz_type": 18,
+            "category": "dj",
+            "create_time": 1674474355,
+            "icon": "smart/icon/ay1526289084175XgNH9/b36b3b0bd141b9cb15fbeb031423a822.png",
+            "id": "bff515c5028bd66e2dycuq",
+            "ip": "188.120.84.221",
+            "lat": "55.6900",
+            "local_key": "6e0c4c830ee36a19",
+            "lon": "12.5400",
+            "model": "07712L",
+            "name": "K\u00f8kken",
+            "online": false,
+            "owner_id": "79455578",
+            "product_id": "q7afkazivui8ytoc",
+            "product_name": "Zarovka E27 9W - Meka",
+            "status": [
+                {
+                    "code": "switch_led",
+                    "value": true
+                },
+                {
+                    "code": "work_mode",
+                    "value": "colour"
+                },
+                {
+                    "code": "bright_value_v2",
+                    "value": 1000
+                },
+                {
+                    "code": "temp_value_v2",
+                    "value": 261
+                },
+                {
+                    "code": "colour_data_v2",
+                    "value": "{\"h\":254,\"s\":1000,\"v\":1000}"
+                },
+                {
+                    "code": "scene_data_v2",
+                    "value": "{\"scene_num\":6,\"scene_units\":[{\"bright\":0,\"h\":0,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":120,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":240,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":61,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":174,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":275,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000}]}"
+                },
+                {
+                    "code": "countdown_1",
+                    "value": 0
+                },
+                {
+                    "code": "music_data",
+                    "value": ""
+                },
+                {
+                    "code": "control_data",
+                    "value": ""
+                },
+                {
+                    "code": "rhythm_mode",
+                    "value": "AAAAAAA="
+                },
+                {
+                    "code": "sleep_mode",
+                    "value": "AAA="
+                },
+                {
+                    "code": "wakeup_mode",
+                    "value": "AAA="
+                },
+                {
+                    "code": "power_memory",
+                    "value": "AAEA/gPoA+gD6AEF"
+                },
+                {
+                    "code": "do_not_disturb",
+                    "value": false
+                },
+                {
+                    "code": "remote_switch",
+                    "value": true
+                },
+                {
+                    "code": "cycle_timing",
+                    "value": "AAAA"
+                },
+                {
+                    "code": "random_timing",
+                    "value": "AAAA"
+                }
+            ],
+            "sub": false,
+            "time_zone": "+01:00",
+            "uid": "eu1674471642995wyeEF",
+            "update_time": 1680211526,
+            "uuid": "ad0c02158c8d504e",
+            "category_name": "Light Source",
+            "gateway_id": ""
+        },
+        {
+            "active_time": 1675633052,
+            "biz_type": 18,
+            "category": "dj",
+            "create_time": 1674471720,
+            "icon": "smart/icon/ay1526289084175XgNH9/b36b3b0bd141b9cb15fbeb031423a822.png",
+            "id": "bfb6ff03b19e1c1090v3fm",
+            "ip": "188.120.84.221",
+            "lat": "55.6900",
+            "local_key": "7241b40e71b2ae89",
+            "lon": "12.5400",
+            "model": "07712L",
+            "name": "Esbens ",
+            "online": true,
+            "owner_id": "79455578",
+            "product_id": "q7afkazivui8ytoc",
+            "product_name": "Zarovka E27 9W - Meka",
+            "status": [
+                {
+                    "code": "switch_led",
+                    "value": false
+                },
+                {
+                    "code": "work_mode",
+                    "value": "scene"
+                },
+                {
+                    "code": "bright_value_v2",
+                    "value": 1000
+                },
+                {
+                    "code": "temp_value_v2",
+                    "value": 200
+                },
+                {
+                    "code": "colour_data_v2",
+                    "value": "{\"h\":110,\"s\":1000,\"v\":1000}"
+                },
+                {
+                    "code": "scene_data_v2",
+                    "value": "{\"scene_num\":8,\"scene_units\":[{\"bright\":0,\"h\":0,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"gradient\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":120,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"gradient\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":240,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"gradient\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":61,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"gradient\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":174,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"gradient\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":275,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"gradient\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000}]}"
+                },
+                {
+                    "code": "countdown_1",
+                    "value": 0
+                },
+                {
+                    "code": "music_data",
+                    "value": ""
+                },
+                {
+                    "code": "control_data",
+                    "value": ""
+                },
+                {
+                    "code": "rhythm_mode",
+                    "value": "AAAAAAA="
+                },
+                {
+                    "code": "sleep_mode",
+                    "value": "AAA="
+                },
+                {
+                    "code": "wakeup_mode",
+                    "value": "AAA="
+                },
+                {
+                    "code": "power_memory",
+                    "value": "AAEBSQKeA94DuQHX"
+                },
+                {
+                    "code": "do_not_disturb",
+                    "value": false
+                },
+                {
+                    "code": "remote_switch",
+                    "value": true
+                },
+                {
+                    "code": "cycle_timing",
+                    "value": "AAAA"
+                },
+                {
+                    "code": "random_timing",
+                    "value": "AAAA"
+                }
+            ],
+            "sub": false,
+            "time_zone": "+01:00",
+            "uid": "eu1674471642995wyeEF",
+            "update_time": 1677229191,
+            "uuid": "2308ce666970c298",
+            "category_name": "Light Source",
+            "gateway_id": ""
+        },
+        {
+            "active_time": 1674474559,
+            "biz_type": 18,
+            "category": "dj",
+            "create_time": 1674474559,
+            "icon": "smart/icon/ay1526289084175XgNH9/b36b3b0bd141b9cb15fbeb031423a822.png",
+            "id": "bf127e20f676d421bfeukt",
+            "ip": "188.120.84.221",
+            "lat": "55.6900",
+            "local_key": "8cfcbf8e907ead1b",
+            "lon": "12.5400",
+            "model": "07712L",
+            "name": "Magnus",
+            "online": false,
+            "owner_id": "79455578",
+            "product_id": "q7afkazivui8ytoc",
+            "product_name": "Zarovka E27 9W - Meka",
+            "status": [
+                {
+                    "code": "switch_led",
+                    "value": true
+                },
+                {
+                    "code": "work_mode",
+                    "value": "white"
+                },
+                {
+                    "code": "bright_value_v2",
+                    "value": 62
+                },
+                {
+                    "code": "temp_value_v2",
+                    "value": 945
+                },
+                {
+                    "code": "colour_data_v2",
+                    "value": "{\"h\":351,\"s\":1000,\"v\":1000}"
+                },
+                {
+                    "code": "scene_data_v2",
+                    "value": "{\"scene_num\":6,\"scene_units\":[{\"bright\":0,\"h\":0,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":120,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":240,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":61,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":174,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":275,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000}]}"
+                },
+                {
+                    "code": "countdown_1",
+                    "value": 0
+                },
+                {
+                    "code": "music_data",
+                    "value": ""
+                },
+                {
+                    "code": "control_data",
+                    "value": ""
+                },
+                {
+                    "code": "rhythm_mode",
+                    "value": "AAEAfwcBBgUAAAAAAGQBBiAAAAAAVBkBCAAAAAAAZDMBEh4AAAAAZDQBFAAAAAAAUBwBFh4AAAAAHBQBFwAAAAAAAAA="
+                },
+                {
+                    "code": "sleep_mode",
+                    "value": "AAA="
+                },
+                {
+                    "code": "wakeup_mode",
+                    "value": "AAA="
+                },
+                {
+                    "code": "power_memory",
+                    "value": "AAEBXwPoA+gD6AIE"
+                },
+                {
+                    "code": "do_not_disturb",
+                    "value": false
+                },
+                {
+                    "code": "remote_switch",
+                    "value": true
+                },
+                {
+                    "code": "cycle_timing",
+                    "value": "AAAA"
+                },
+                {
+                    "code": "random_timing",
+                    "value": "AAAA"
+                }
+            ],
+            "sub": false,
+            "time_zone": "+01:00",
+            "uid": "eu1674471642995wyeEF",
+            "update_time": 1677222107,
+            "uuid": "9b049418f40fc7bf",
+            "category_name": "Light Source",
+            "gateway_id": ""
+        },
+        {
+            "active_time": 1674475406,
+            "biz_type": 18,
+            "category": "dj",
+            "create_time": 1674475406,
+            "icon": "smart/icon/ay1526289084175XgNH9/b36b3b0bd141b9cb15fbeb031423a822.png",
+            "id": "bf774fa185ec269f6aaxng",
+            "ip": "188.120.84.221",
+            "lat": "55.6855",
+            "local_key": "7d36dec479062bcf",
+            "lon": "12.5380",
+            "model": "07712L",
+            "name": "Mathias",
+            "online": false,
+            "owner_id": "79455578",
+            "product_id": "q7afkazivui8ytoc",
+            "product_name": "Zarovka E27 9W - Meka",
+            "status": [
+                {
+                    "code": "switch_led",
+                    "value": false
+                },
+                {
+                    "code": "work_mode",
+                    "value": "white"
+                },
+                {
+                    "code": "bright_value_v2",
+                    "value": 10
+                },
+                {
+                    "code": "temp_value_v2",
+                    "value": 0
+                },
+                {
+                    "code": "colour_data_v2",
+                    "value": "{\"h\":147,\"s\":1000,\"v\":1000}"
+                },
+                {
+                    "code": "scene_data_v2",
+                    "value": "{\"scene_num\":6,\"scene_units\":[{\"bright\":0,\"h\":0,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":120,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":240,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":61,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":174,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000},{\"bright\":0,\"h\":275,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"jump\",\"unit_gradient_duration\":70,\"unit_switch_duration\":70,\"v\":1000}]}"
+                },
+                {
+                    "code": "countdown_1",
+                    "value": 0
+                },
+                {
+                    "code": "music_data",
+                    "value": ""
+                },
+                {
+                    "code": "control_data",
+                    "value": ""
+                },
+                {
+                    "code": "rhythm_mode",
+                    "value": "AAEAfwUBBw0AAAAAAGQBCB4AAAAAFBkBCDEAAAAAZGQBEyEAAAAAUDIBFhwAAAAAAAA="
+                },
+                {
+                    "code": "sleep_mode",
+                    "value": "AAA="
+                },
+                {
+                    "code": "wakeup_mode",
+                    "value": "AAA="
+                },
+                {
+                    "code": "power_memory",
+                    "value": "AAEAkwPoA+gACgAA"
+                },
+                {
+                    "code": "do_not_disturb",
+                    "value": false
+                },
+                {
+                    "code": "remote_switch",
+                    "value": true
+                },
+                {
+                    "code": "cycle_timing",
+                    "value": "AAAA"
+                },
+                {
+                    "code": "random_timing",
+                    "value": "AAAA"
+                }
+            ],
+            "sub": false,
+            "time_zone": "+01:00",
+            "uid": "eu1674471642995wyeEF",
+            "update_time": 1675636604,
+            "uuid": "a4bd57a992ffdb10",
+            "category_name": "Light Source",
+            "gateway_id": ""
+        }
+    ],
+    "success": true,
+    "t": 1680392402090,
+    "tid": "858979bed0e611ed94b47648064b5440",
+    "fetches": 1,
+    "total": 4,
+    "file": {
+        "name": "tuya-raw.json",
+        "description": "Full raw list of Tuya devices.",
+        "account": "33d9eey4kujyy9w4rs8q",
+        "date": "2023-04-02T01:40:03.874477",
+        "tinytuya": "1.12.2"
+    }
+}
