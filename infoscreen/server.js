@@ -40,6 +40,12 @@ let currentFileIndex = 0;
 
 async function getNextHtmlFile(folderPath) {
   const files = await getHtmlFilesFromFolder(folderPath);
+  
+  // Check if there are any files in the folder
+  if (files.length === 0) {
+    throw new Error('No HTML files found in the folder');
+  }
+
   const nextFile = path.join(folderPath, files[currentFileIndex]);
   currentFileIndex = (currentFileIndex + 1) % files.length;
   return nextFile;
