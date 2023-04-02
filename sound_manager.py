@@ -20,7 +20,7 @@ def play_sound(filename):
 # Note that raspberry pi thinks its GMT
 schedule.every().day.at("19:00").do(lambda: play_sound("pizzajingle"))
 schedule.every().day.at("12:00").do(lambda: play_sound("gas"))
-schedule.every().day.at("12:200").do(lambda: play_sound("gas"))
+schedule.every().day.at("12:20").do(lambda: play_sound("gas"))
 
 # Run the script indefinitely looking for scheduled sounds
 while True:
