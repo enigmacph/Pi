@@ -26,7 +26,7 @@ def play_sound(filename):
         print("no speakers connected")
 
 # Schedule sounds
-# Note that raspberry pi thinks its GMT
+# Note that raspberry pi thinks its UK time
 schedule.every().day.at("17:00").do(lambda: play_sound("pizzajingle"))
 schedule.every().day.at("10:00").do(lambda: play_sound("gas"))
 
