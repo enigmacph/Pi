@@ -19,11 +19,14 @@ def play_sound(filename):
     except:
         print("Error joining speakers")
     
-    # play alarm sound
-    master.play_uri(f"http://192.168.50.252/{filename}.mp3")
+    try:
+        # play alarm sound
+        master.play_uri(f"http://192.168.50.252/{filename}.mp3")
+    except:
+        print("no speakers connected")
 
 # Schedule sounds
-# Note that raspberry pi thinks its GMT
+# Note that raspberry pi thinks its UK time
 schedule.every().day.at("17:00").do(lambda: play_sound("pizzajingle"))
 schedule.every().day.at("10:00").do(lambda: play_sound("gas"))
 

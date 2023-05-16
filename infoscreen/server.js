@@ -40,6 +40,12 @@ let currentFileIndex = 0;
 
 async function getNextHtmlFile(folderPath) {
   const files = await getHtmlFilesFromFolder(folderPath);
+  
+  // Check if there are any files in the folder
+  if (files.length === 0) {
+    throw new Error('No HTML files found in the folder');
+  }
+
   const nextFile = path.join(folderPath, files[currentFileIndex]);
   currentFileIndex = (currentFileIndex + 1) % files.length;
   return nextFile;
@@ -50,9 +56,8 @@ io.on('connection', (socket) => {
 
   setInterval(async () => {
     try {
-        const nextHtmlFile = await getNextHtmlFile(path.join(__dirname, 'HTML'));
-
-
+      const nextHtmlFile = await getNextHtmlFile(path.join(__dirname, 'HTML'));
+  
       fs.readFile(nextHtmlFile, (err, data) => {
         if (err) {
           console.error('Error reading next HTML file:', err);
@@ -63,11 +68,7 @@ io.on('connection', (socket) => {
     } catch (err) {
       console.error('Error getting next HTML file:', err);
     }
-  }, 5 * 60 * 10); // Update every 5 minutes
-
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
-  });
+  }, 5 * 60 * 1000); // Update every 5 minutes
 });
 
 const PORT = process.env.PORT || 3000;
