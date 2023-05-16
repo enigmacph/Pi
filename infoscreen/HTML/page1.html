@@ -1,9 +1,61 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <header>
+    <title>Time in San Francisco</title>
+    <style>
+      body {
+        background-color: #000000;
+        color: #ffffff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 50px;
+        text-align: center;
+      }
 
-<h1>MAGNUS JUNGERSEN!</h1>
+      h1 {
+        font-size: 50px;
+      }
 
-</body>
+      h2 {
+        font-size: 100px;
+      }
+    </style>
+  </header>
+  <body>
+    <h1>TIME IN SAN FRANCISCO</h1>
+    <h2 id="time"></h2>
+    <h1>TIME DIFFERENCE BETWEEN HERE AND SAM ALTMAN</h1>
+    <h2 id="timeDifference">08:00:00</h2>
+    <script>
+      function startTime() {
+        // get time in San Francisco and display it in id=time. We're currently in Copenhagen so we need to add 9 hours to the time in San Francisco
+        // var today = Date(new Date() - 9 * 60 * 60 * 1000);
+        // Make the above work
+        var today = new Date();
+        var timeDifference = today.getTime() - 9 * 60 * 60 * 1000;
+        today.setTime(timeDifference);
+
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+
+        // add a zero in front of numbers<10
+        m = checkTime(m);
+        s = checkTime(s);
+
+        document.getElementById("time").innerHTML = h + ":" + m + ":" + s;
+        var t = setTimeout(function () {
+          startTime();
+        }, 500);
+      }
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+
+      startTime();
+    </script>
+  </body>
 </html>
-
