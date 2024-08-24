@@ -15,7 +15,7 @@ def set_wallpaper(image_path):
     os.environ['XAUTHORITY'] = '/home/pi/.Xauthority'  # Adjust if the user is different
 
     # Command to change the wallpaper in Raspberry Pi OS
-    subprocess.run(['feh', '--bg-scale', image_path])
+    subprocess.run(['pcmanfm', '--set-wallpaper', image_path])
 
 while True:
     # Get a list of all image files in the folder
