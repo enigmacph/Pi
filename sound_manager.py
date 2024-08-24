@@ -12,10 +12,10 @@ def play_sound(filename):
     try:
         master = den
         den.volume=40
-        bedroom.join(master)
-        bedroom.volume=40
-        hallway.join(master)
-        hallway.volume=40
+        # bedroom.join(master)
+        # bedroom.volume=40
+        # hallway.join(master)
+        # hallway.volume=40
     except:
         print("Error joining speakers")
     
