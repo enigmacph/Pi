@@ -7,7 +7,7 @@ import subprocess
 wallpaper_folder = '/home/pi/wallpapers'
 
 # Time interval between wallpaper changes (in seconds)
-interval = 300  # 5 minutes
+interval = 60  # 5 minutes
 
 def set_wallpaper(image_path):
     # Set environment variables to access the graphical session
