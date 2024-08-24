@@ -7,7 +7,7 @@ import subprocess
 wallpaper_folder = '/home/pi/wallpapers'
 
 # Time interval between wallpaper changes (in seconds)
-interval = 60  # 5 minutes
+interval = 60  # 60 = 1 minute
 
 def set_wallpaper(image_path):
     # Set environment variables to access the graphical session
@@ -15,7 +15,7 @@ def set_wallpaper(image_path):
     os.environ['XAUTHORITY'] = '/home/pi/.Xauthority'  # Adjust if the user is different
 
     # Command to change the wallpaper in Raspberry Pi OS
-    subprocess.run(['pcmanfm', '--set-wallpaper', image_path])
+    subprocess.run(['feh', '--bg-scale', image_path])
 
 while True:
     # Get a list of all image files in the folder
