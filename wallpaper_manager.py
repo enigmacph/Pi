@@ -9,6 +9,7 @@ def set_wallpaper(image_path):
     # Set environment variables to access the graphical session
     os.environ['DISPLAY'] = ':0'  # This is typically the display for the Pi's desktop session
     os.environ['XAUTHORITY'] = '/home/pi/.Xauthority'  # Adjust if the user is different
+    os.environ['XDG_RUNTIME_DIR'] = '/run/user/1000'  # Adjust if the user is different
 
     # Command to change the wallpaper in Raspberry Pi OS
     subprocess.run(['pcmanfm', '--set-wallpaper', image_path])
