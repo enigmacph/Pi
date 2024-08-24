@@ -11,6 +11,6 @@ hallway.join(master)
 
 # start 'code red' sequence on the group
 def start_code_red():
-    master.play_uri("http://192.168.50.252/pizzajingle.mp3")
+    master.play_uri("http://192.168.50.252/testsound.mp3")
 
 start_code_red()
