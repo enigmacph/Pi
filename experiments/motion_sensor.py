@@ -27,4 +27,4 @@ while True:
     if GPIO.input(PIR_PIN):
         print("Motion Detected!")
         play_sound()
-    time.sleep(5)
+    time.sleep(1)
