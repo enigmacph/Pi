@@ -6,7 +6,6 @@ import soco
 import schedule
 import time
 
-
 def play_sound():
     try:
         den = soco.SoCo('192.168.50.198')
