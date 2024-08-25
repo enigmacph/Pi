@@ -20,17 +20,11 @@ PIR_PIN = 25  # GPIO pin connected to the PIR OUT
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(PIR_PIN, GPIO.IN)
 
-try:
-    print("PIR Module Test (CTRL+C to exit)")
-    time.sleep(2)  # Give time for the sensor to stabilize
-    print("Ready")
+time.sleep(2)  # Give time for the sensor to stabilize
+print("Ready")
 
-    while True:
-        if GPIO.input(PIR_PIN):
-            print("Motion Detected!")
-            play_sound()
-        time.sleep(5)
-
-except KeyboardInterrupt:
-    print("Quit")
-    GPIO.cleanup()
+while True:
+    if GPIO.input(PIR_PIN):
+        print("Motion Detected!")
+        play_sound()
+    time.sleep(5)
