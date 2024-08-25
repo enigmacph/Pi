@@ -57,3 +57,8 @@ sudo systemctl daemon-reload
 ### sudo crontab -e
 * * * * * cd /home/pi/Python/Pi/ && git pull >/dev/null 2>&1
 0 4 * * * systemctl restart sound_manager.service
+
+
+### Setting up the wallpaper manager from scratch
+create systemctl service which runs wallpaper_manager.sh after graphical interfaces have loaded (you must specify this in the service)
+
