@@ -6,11 +6,11 @@ import soco
 import schedule
 import time
 
-den = soco.SoCo('192.168.50.198')
-den.volume=80
 
 def play_sound():
     try:
+        den = soco.SoCo('192.168.50.198')
+        den.volume=80
         den.play_uri("http://192.168.50.252/obi-wan-hello-there.mp3")
     except:
         print("error wrt. sonos")
