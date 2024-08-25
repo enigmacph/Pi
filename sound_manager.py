@@ -28,10 +28,11 @@ def play_sound(filename):
 # Schedule sounds
 # Note that raspberry pi thinks its UK time
 schedule.every().day.at("17:00").do(lambda: play_sound("pizzajingle"))
-# schedule.every().day.at("10:00").do(lambda: play_sound("gas"))
-# schedule.every().day.at("20:00").do(lambda: play_sound("ohyeah"))
-# schedule.every().day.at("8:00").do(lambda: play_sound("japan_lul"))
-schedule.every().day.at("20:13").do(lambda: play_sound("the_orb"))
+schedule.every().day.at("11:00").do(lambda: play_sound("bells"))
+schedule.every().monday.at("10:00").do(lambda: play_sound("gas"))
+schedule.every().monday.at("16:00").do(lambda: play_sound("ohyeah"))
+schedule.every().wednesday.at("12:00").do(lambda: play_sound("japan_lul"))
+schedule.every().friday.at("19:00").do(lambda: play_sound("the_orb"))
 
 # Run the script indefinitely looking for scheduled sounds
 while True:
