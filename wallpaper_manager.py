@@ -12,7 +12,8 @@ def set_wallpaper(image_path):
     os.environ['XDG_RUNTIME_DIR'] = '/run/user/1000'  # Adjust if the user is different
 
     # Command to change the wallpaper in Raspberry Pi OS
-    subprocess.run(['pcmanfm', '--set-wallpaper', image_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(['feh', '--bg-scale', image_path])
+    # subprocess.run(['pcmanfm', '--set-wallpaper', image_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 # Get a list of all image files in the folder
 wallpapers = [f for f in os.listdir(wallpaper_folder) if f.endswith(('.png', '.jpg', '.jpeg'))]
