@@ -20,10 +20,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(PIR_PIN, GPIO.IN)
 
 time.sleep(2)  # Give time for the sensor to stabilize
-print("Ready")
 
 while True:
     if GPIO.input(PIR_PIN):
-        print("Motion Detected!")
         play_sound()
     time.sleep(1)
