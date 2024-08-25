@@ -31,7 +31,7 @@ schedule.every().day.at("17:00").do(lambda: play_sound("pizzajingle"))
 # schedule.every().day.at("10:00").do(lambda: play_sound("gas"))
 # schedule.every().day.at("20:00").do(lambda: play_sound("ohyeah"))
 # schedule.every().day.at("8:00").do(lambda: play_sound("japan_lul"))
-# schedule.every().day.at("11:00").do(lambda: play_sound("the_orb"))
+schedule.every().day.at("20:13").do(lambda: play_sound("the_orb"))
 
 # Run the script indefinitely looking for scheduled sounds
 while True:
