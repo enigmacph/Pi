@@ -29,7 +29,7 @@ try:
         if GPIO.input(PIR_PIN):
             print("Motion Detected!")
             play_sound()
-        time.sleep(1)
+        time.sleep(5)
 
 except KeyboardInterrupt:
     print("Quit")
