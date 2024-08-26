@@ -100,14 +100,7 @@ def main():
     while True:
         # temperature, humidity = read_sensor()
 
-        humidity = 0
-        temperature = 0
-
-        for i in range(0,10):
-            humidity, temperature = Adafruit_DHT.read(sensor, pin)
-            if humidity == float:
-                break
-            time.sleep(2)
+        humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 
         widget_image = fetch_weather_widget()
 
