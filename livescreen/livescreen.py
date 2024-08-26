@@ -4,6 +4,7 @@ import time
 import requests
 # import Adafruit_DHT
 import cairosvg
+import io
 
 # Initialize pygame
 os.environ["DISPLAY"] = ":0"
@@ -33,13 +34,22 @@ image_cycle = get_next_image()
 def fetch_weather_widget():
     widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?mode=dark"  # Replace with your specific SVG widget URL
     response = requests.get(widget_url)
+    
     if response.status_code == 200:
-        with open("weather_widget.svg", 'wb') as out_file:
-            out_file.write(response.content)
-        # Convert SVG to PNG
-        cairosvg.svg2png(url="weather_widget.svg", write_to="weather_widget.png")
-    return "weather_widget.png"
-
+        # Convert SVG to PNG in memory
+        try:
+            svg_data = response.content
+            png_data = cairosvg.svg2png(bytestring=svg_data)
+            
+            # Load the PNG data into a Pygame surface or return it
+            png_image = io.BytesIO(png_data)
+            return png_image  # Return a BytesIO object containing the PNG data
+        except Exception as e:
+            print(f"Error converting SVG to PNG: {e}")
+            return None
+    else:
+        print(f"Error fetching SVG: HTTP {response.status_code}")
+        return None
 
 def update_display(temperature, humidity, widget_image):
     screen.fill((0,0,0)) # clear screen
