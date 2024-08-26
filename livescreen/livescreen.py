@@ -102,6 +102,12 @@ def main():
 
         humidity, temperature = Adafruit_DHT.read(sensor, pin)
 
+        if type(humidity) != "float":
+            humidity = 0
+
+        if type(temperature) != "float":
+            temperature = 0
+
         widget_image = fetch_weather_widget()
 
         update_display(temperature, humidity, widget_image)
