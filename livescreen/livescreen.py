@@ -107,7 +107,7 @@ def main():
             humidity, temperature = Adafruit_DHT.read(sensor, pin)
             if humidity == float:
                 break
-            time.sleep(0.1)
+            time.sleep(2)
 
         widget_image = fetch_weather_widget()
 
