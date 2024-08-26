@@ -29,7 +29,7 @@ def play_sound(filename):
 # Schedule sounds
 # Note that raspberry pi thinks its UK time
 schedule.every().day.at("17:00").do(lambda: play_sound("pizzajingle"))
-schedule.every().day.at("11:00").do(lambda: play_sound("bells"))
+schedule.every().day.at("11:00").do(lambda: play_sound("Bells"))
 schedule.every().monday.at("10:00").do(lambda: play_sound("gas"))
 schedule.every().monday.at("16:00").do(lambda: play_sound("ohyeah"))
 schedule.every().wednesday.at("12:00").do(lambda: play_sound("japan_lul"))
