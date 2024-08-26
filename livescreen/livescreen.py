@@ -100,7 +100,9 @@ def main():
     while True:
         # temperature, humidity = read_sensor()
 
-        humidity, temperature = Adafruit_DHT.read(sensor, pin)
+        for i in range(0, 5):
+            humidity, temperature = Adafruit_DHT.read(sensor, pin)
+            time.sleep(0.1)
 
         if type(humidity) != "float":
             humidity = 0
