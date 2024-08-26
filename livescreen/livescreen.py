@@ -23,7 +23,8 @@ pin = 4  # Replace with the GPIO pin number you used (e.g., GPIO4 corresponds to
 os.environ["DISPLAY"] = ":0"
 pygame.init()
 info = pygame.display.Info()
-screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.NOFRAME)
+# screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.NOFRAME)
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.mouse.set_visible(False)  # Hide the mouse cursor
 
 # Load fonts
