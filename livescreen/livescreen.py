@@ -102,10 +102,6 @@ def main():
 
         humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
         print(humidity, temperature)
-        humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-        print(humidity, temperature)
-        humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-        print(humidity, temperature)
 
         widget_image = fetch_weather_widget()
 
