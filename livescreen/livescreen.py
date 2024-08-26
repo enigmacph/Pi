@@ -55,6 +55,7 @@ def fetch_weather_widget():
         # Convert SVG to PNG in memory
         try:
             svg_data = sanitize_svg(response.content)
+            # print("GOT TO HERE")
             png_data = cairosvg.svg2png(bytestring=svg_data)
             
             # Load the PNG data into a Pygame surface or return it
@@ -91,9 +92,9 @@ def update_display(temperature, humidity, widget_image):
     screen.blit(temp_hum_surface, temp_hum_box.topleft)
 
     # Load and display the weather widget image
-    #weather_widget = pygame.image.load(widget_image)
-    #weather_widget = pygame.transform.scale(weather_widget, (300, 150))  # Resize as needed
-    #screen.blit(weather_widget, (info.current_w - 320, info.current_h - 180))  # Position on the screen
+    weather_widget = pygame.image.load(widget_image)
+    weather_widget = pygame.transform.scale(weather_widget, (600, 300))  # Resize as needed old 300 150
+    screen.blit(weather_widget, (info.current_w - 620, info.current_h - 330))  # Position on the screen
 
     pygame.display.flip()
 
