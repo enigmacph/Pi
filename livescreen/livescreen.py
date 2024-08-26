@@ -97,11 +97,17 @@ def update_display(temperature, humidity, widget_image):
     pygame.display.flip()
 
 def main():
+    humidity = 0
+    temperature = 0
     while True:
-        # temperature, humidity = read_sensor()
+
+        prev_humidity = humidity
+        prev_temperature = temperature
 
         humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-        print(humidity, temperature)
+        if humidity != float:
+            humidity = prev_humidity
+            temperature = prev_temperature
 
         widget_image = fetch_weather_widget()
 
