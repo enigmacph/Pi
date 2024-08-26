@@ -75,9 +75,9 @@ def update_display(temperature, humidity, widget_image):
     screen.blit(temp_hum_surface, temp_hum_box.topleft)
 
     # Load and display the weather widget image
-    #weather_widget = pygame.image.load(widget_image)
-    #weather_widget = pygame.transform.scale(weather_widget, (300, 150))  # Resize as needed
-    #screen.blit(weather_widget, (info.current_w - 320, info.current_h - 180))  # Position on the screen
+    weather_widget = pygame.image.load(widget_image)
+    weather_widget = pygame.transform.scale(weather_widget, (300, 150))  # Resize as needed
+    screen.blit(weather_widget, (info.current_w - 320, info.current_h - 180))  # Position on the screen
 
     pygame.display.flip()
 
