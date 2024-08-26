@@ -45,6 +45,7 @@ def fetch_weather_widget():
         # Convert SVG to PNG in memory
         try:
             svg_data = sanitize_svg(response.content)
+            print("GOT TO HERE")
             png_data = cairosvg.svg2png(bytestring=svg_data)
             
             # Load the PNG data into a Pygame surface or return it
