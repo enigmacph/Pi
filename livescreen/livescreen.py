@@ -21,6 +21,7 @@ pin = 4
 # Path to your images folder
 image_folder = "/home/pi/wallpapers"
 
+
 def get_next_image():
     images = [f for f in os.listdir(image_folder) if f.endswith(('jpg', 'png', 'jpeg'))]
     for image in images:
@@ -28,28 +29,14 @@ def get_next_image():
 
 image_cycle = get_next_image()
 
-def convert_svg_to_png(input_svg, output_png):
-    """ Convert SVG file to PNG using svglib and reportlab """
-    try:
-        # Convert SVG to ReportLab Graphics object
-        drawing = svg2rlg(input_svg)
-        
-        # Render the graphics object to a PNG file
-        renderPM.drawToFile(drawing, output_png, fmt='PNG')
-        print(f"Successfully converted {input_svg} to {output_png}")
-    except Exception as e:
-        print(f"Error converting SVG to PNG: {e}")
-
-
 def fetch_weather_widget():
     widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?mode=dark"  # Replace with your specific SVG widget URL
     response = requests.get(widget_url)
     if response.status_code == 200:
         with open("weather_widget.svg", 'wb') as out_file:
             out_file.write(response.content)
-        
         # Convert SVG to PNG
-        convert_svg_to_png("weather_widget.svg", "weather_widget.png")
+        cairosvg.svg2png(url="weather_widget.svg", write_to="weather_widget.png")
     return "weather_widget.png"
 
 
