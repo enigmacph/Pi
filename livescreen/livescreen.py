@@ -5,6 +5,7 @@ import requests
 # import Adafruit_DHT
 import cairosvg
 import io
+import re
 
 # Initialize pygame
 os.environ["DISPLAY"] = ":0"
@@ -31,6 +32,11 @@ def get_next_image():
 
 image_cycle = get_next_image()
 
+def sanitize_svg(svg_content):
+    # Remove or correct the problematic float value
+    sanitized_svg = re.sub(r"(\d+\.\d+)(r)", r"\1", svg_content.decode('utf-8'))
+    return sanitized_svg.encode('utf-8')
+
 def fetch_weather_widget():
     widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?mode=dark"  # Replace with your specific SVG widget URL
     response = requests.get(widget_url)
@@ -38,7 +44,8 @@ def fetch_weather_widget():
     if response.status_code == 200:
         # Convert SVG to PNG in memory
         try:
-            svg_data = response.content
+            svg_data = sanitize_svg(response.content)
+            print("GOT TO HERE")
             png_data = cairosvg.svg2png(bytestring=svg_data)
             
             # Load the PNG data into a Pygame surface or return it
