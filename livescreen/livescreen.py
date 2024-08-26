@@ -106,7 +106,8 @@ def main():
         prev_temperature = temperature
 
         humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-        if humidity != float:
+
+        if type(humidity) != float:
             humidity = prev_humidity
             temperature = prev_temperature
 
