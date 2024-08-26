@@ -6,8 +6,20 @@ import requests
 import cairosvg
 import io
 import re
+import random
 
-# Initialize pygame
+import Adafruit_DHT
+import time
+
+## Initialize humidity sensor
+
+# Set sensor type : Options are DHT11, DHT22 or AM2302
+sensor = Adafruit_DHT.DHT11
+
+# Set GPIO pin where the data pin of DHT11 is connected
+pin = 4  # Replace with the GPIO pin number you used (e.g., GPIO4 corresponds to pin 7)
+
+## Initialize pygame
 os.environ["DISPLAY"] = ":0"
 pygame.init()
 info = pygame.display.Info()
@@ -24,11 +36,9 @@ pin = 4
 # Path to your images folder
 image_folder = "/home/pi/wallpapers"
 
-
 def get_next_image():
     images = [f for f in os.listdir(image_folder) if f.endswith(('jpg', 'png', 'jpeg'))]
-    for image in images:
-        yield os.path.join(image_folder, image)
+    return os.path.join(image_folder, random.choice(images))
 
 image_cycle = get_next_image()
 
@@ -45,7 +55,6 @@ def fetch_weather_widget():
         # Convert SVG to PNG in memory
         try:
             svg_data = sanitize_svg(response.content)
-            print("GOT TO HERE")
             png_data = cairosvg.svg2png(bytestring=svg_data)
             
             # Load the PNG data into a Pygame surface or return it
@@ -91,7 +100,8 @@ def update_display(temperature, humidity, widget_image):
 def main():
     while True:
         # temperature, humidity = read_sensor()
-        temperature, humidity = 23, 50
+
+        humidity, temperature = Adafruit_DHT.read(sensor, pin)
 
         widget_image = fetch_weather_widget()
 
