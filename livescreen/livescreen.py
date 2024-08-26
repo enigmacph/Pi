@@ -6,6 +6,7 @@ import requests
 import cairosvg
 
 # Initialize pygame
+os.environ["DISPLAY"] = ":0"
 pygame.init()
 info = pygame.display.Info()
 screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.NOFRAME)
