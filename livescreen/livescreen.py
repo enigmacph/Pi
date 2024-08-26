@@ -5,6 +5,7 @@ import requests
 # import Adafruit_DHT
 import cairosvg
 import io
+import re
 
 # Initialize pygame
 os.environ["DISPLAY"] = ":0"
