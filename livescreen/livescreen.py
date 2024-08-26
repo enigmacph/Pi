@@ -40,8 +40,6 @@ def get_next_image():
     images = [f for f in os.listdir(image_folder) if f.endswith(('jpg', 'png', 'jpeg'))]
     return os.path.join(image_folder, random.choice(images))
 
-image_cycle = get_next_image()
-
 def sanitize_svg(svg_content):
     # Remove or correct the problematic float value
     sanitized_svg = re.sub(r"(\d+\.\d+)(r)", r"\1", svg_content.decode('utf-8'))
@@ -72,7 +70,7 @@ def update_display(temperature, humidity, widget_image):
     screen.fill((0,0,0)) # clear screen
 
     # Load and display background image
-    image_path = next(image_cycle)
+    image_path = get_next_image()
     background = pygame.image.load(image_path)
     background = pygame.transform.scale(background, (info.current_w, info.current_h))
     screen.blit(background, (0, 0))
