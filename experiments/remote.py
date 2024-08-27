@@ -1,8 +1,8 @@
-import time
 import pigpio
+import time
 
-# Setup GPIO pin for IR sensor
-IR_GPIO = 14  # Use the GPIO pin number you connected the IR receiver to
+# IR sensor GPIO pin
+IR_GPIO = 18  # Replace with the GPIO pin you're using
 
 # Initialize pigpio library
 pi = pigpio.pi()
@@ -11,23 +11,44 @@ pi = pigpio.pi()
 if not pi.connected:
     exit()
 
+# NEC protocol constants
+PRE_MARK_MIN = 8500  # Microseconds
+PRE_MARK_MAX = 9500  # Microseconds
+BIT_MARK_MIN = 400   # Microseconds
+BIT_MARK_MAX = 700   # Microseconds
+SPACE_ONE_MIN = 1600 # Microseconds
+SPACE_ONE_MAX = 2000 # Microseconds
+SPACE_ZERO_MIN = 400 # Microseconds
+SPACE_ZERO_MAX = 700 # Microseconds
+
+# Variables to hold the IR signal data
+last_tick = 0
+code = []
+bits = []
+
 # Callback function to handle IR signal
 def ir_callback(gpio, level, tick):
-    if level == 0:  # Signal received (falling edge)
-        print(f"Received signal at tick {tick}")
+    global last_tick, code, bits
+    
+    if level == 0:  # Falling edge
+        delta = pigpio.tickDiff(last_tick, tick)
+        last_tick = tick
 
-# Set up the callback
-cb = pi.callback(IR_GPIO, pigpio.FALLING_EDGE, ir_callback)
+        # Pre-mark: signal start
+        if PRE_MARK_MIN <= delta <= PRE_MARK_MAX:
+            code = []
+            bits = []
+        
+        # Bit mark: 1 or 0
+        elif BIT_MARK_MIN <= delta <= BIT_MARK_MAX:
+            code.append(delta)
+        
+        # Space after bit: 1 or 0
+        elif SPACE_ONE_MIN <= delta <= SPACE_ONE_MAX:
+            bits.append(1)
+        
+        elif SPACE_ZERO_MIN <= delta <= SPACE_ZERO_MAX:
+            bits.append(0)
 
-try:
-    print("Waiting for IR signal...")
-    while True:
-        time.sleep(1)
-
-except KeyboardInterrupt:
-    print("Exiting...")
-
-finally:
-    # Clean up
-    cb.cancel()
-    pi.stop()
+        if len(bits) == 32:  # NEC protocol uses 32 bits
+            print(f"Received NEC code: {bits_to_hex(bits)}")
