@@ -1,78 +1,66 @@
-import pigpio
-import time
+#!/usr/bin/python
+import evdev
+from time import sleep
 
-# IR sensor GPIO pin
-IR_GPIO = 18  # Replace with the GPIO pin you're using
+# returns path of gpio ir receiver device
+def get_ir_device():
+    devices = [evdev.InputDevice(path) for path in evdev.list_devices()]
+    for device in devices:
+        if (device.name == "gpio_ir_recv"):
+            print("Using device", device.path, "\n")
+            return device
 
-# Initialize pigpio library
-pi = pigpio.pi()
+    print("No device found!")
+    sys.exit()
 
-# Ensure pigpio daemon is running
-if not pi.connected:
-    exit()
+# returns a generator object that yields InputEvent instances
+# raises BlockingIOError if no events available, which much be caught
+def get_all_events(dev):
+    return dev.read()
 
-# NEC protocol constants
-PRE_MARK_MIN = 8500  # Microseconds
-PRE_MARK_MAX = 9500  # Microseconds
-BIT_MARK_MIN = 400   # Microseconds
-BIT_MARK_MAX = 700   # Microseconds
-SPACE_ONE_MIN = 1600 # Microseconds
-SPACE_ONE_MAX = 2000 # Microseconds
-SPACE_ZERO_MIN = 400 # Microseconds
-SPACE_ZERO_MAX = 700 # Microseconds
+# returns the most recent InputEvent instance
+# returns NoneType if no events available
+def get_last_event(dev):
+    try:
+        for event in dev.read():	# iterate through all queued events
+            if (event.value > 0):
+                last_event = event
+    except BlockingIOError: # no events to be read
+        last_event = None
 
-# Variables to hold the IR signal data
-last_tick = 0
-code = []
-bits = []
+    return last_event
 
-# Callback function to handle IR signal
-def ir_callback(gpio, level, tick):
-    global last_tick, code, bits
-    
-    if level == 0:  # Falling edge
-        delta = pigpio.tickDiff(last_tick, tick)
-        last_tick = tick
+# returns the next InputEvent instance
+# blocks until event is available
+def get_next_event(dev):
+    while(True):
+    	event = dev.read_one()
+    	if (event):
+    		return event
 
-        # Pre-mark: signal start
-        if PRE_MARK_MIN <= delta <= PRE_MARK_MAX:
-            code = []
-            bits = []
-        
-        # Bit mark: 1 or 0
-        elif BIT_MARK_MIN <= delta <= BIT_MARK_MAX:
-            code.append(delta)
-        
-        # Space after bit: 1 or 0
-        elif SPACE_ONE_MIN <= delta <= SPACE_ONE_MAX:
-            bits.append(1)
-        
-        elif SPACE_ZERO_MIN <= delta <= SPACE_ZERO_MAX:
-            bits.append(0)
+def main():
+    device = get_ir_device()
 
-        if len(bits) == 32:  # NEC protocol uses 32 bits
-            print(f"Received NEC code: {bits_to_hex(bits)}")
-            bits = []  # Clear bits after decoding
+    print("Waiting 5 seconds for IR signals.  A list of all received commands will be returned.")
+    sleep(5)
+    events = get_all_events(device)
+    try:
+        event_list = [event.value for event in events]
+        print("Received commands:", event_list, "\n")
+    except BlockingIOError:
+        print("No commands received.\n")
 
-# Helper function to convert bits to hex
-def bits_to_hex(bits):
-    value = 0
-    for bit in bits:
-        value = (value << 1) | bit
-    return hex(value)
+    print("Waiting 5 seconds for IR signals.  The last received command will be returned.")
+    sleep(5)
+    last_event = get_last_event(device)
+    if last_event is not None:
+        print("Received command:", last_event.value, "\n")
+    else:
+        print("No commands received.\n")
 
-# Set up the callback
-cb = pi.callback(IR_GPIO, pigpio.FALLING_EDGE, ir_callback)
+    print("Waiting indefinitely for IR signals.  The first received command will be returned.")
+    next_event = get_next_event(device)
+    print("Received command:", next_event.value, "\n")
 
-try:
-    print("Waiting for NEC IR signal...")
-    while True:
-        time.sleep(1)
-
-except KeyboardInterrupt:
-    print("Exiting...")
-
-finally:
-    # Clean up
-    cb.cancel()
-    pi.stop()
+if __name__ == "__main__":
+    main()
