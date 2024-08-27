@@ -52,3 +52,27 @@ def ir_callback(gpio, level, tick):
 
         if len(bits) == 32:  # NEC protocol uses 32 bits
             print(f"Received NEC code: {bits_to_hex(bits)}")
+            bits = []  # Clear bits after decoding
+
+# Helper function to convert bits to hex
+def bits_to_hex(bits):
+    value = 0
+    for bit in bits:
+        value = (value << 1) | bit
+    return hex(value)
+
+# Set up the callback
+cb = pi.callback(IR_GPIO, pigpio.FALLING_EDGE, ir_callback)
+
+try:
+    print("Waiting for NEC IR signal...")
+    while True:
+        time.sleep(1)
+
+except KeyboardInterrupt:
+    print("Exiting...")
+
+finally:
+    # Clean up
+    cb.cancel()
+    pi.stop()
