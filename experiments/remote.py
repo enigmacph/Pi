@@ -1,18 +1,33 @@
-import RPi.GPIO as GPIO
 import time
+import pigpio
 
+# Setup GPIO pin for IR sensor
+IR_GPIO = 14  # Use the GPIO pin number you connected the IR receiver to
 
-# Set up GPIO
-GPIO.setmode(GPIO.BCM)  # Use BCM numbering
-GPIO.setup(14, GPIO.IN)  # Set GPIO pin 14 as input (You can change this to any GPIO pin you are using)
-
-while True:
-    if GPIO.input(14) == 0:  # Assuming the module outputs LOW when an IR signal is detected
-        print("IR signal detected!")
-        time.sleep(0.2)  # Add a small delay to avoid overwhelming the console with messages
-    else:
-        time.sleep(0.1)  # Add a small delay to prevent excessive CPU usage
-
-
+# Initialize pigpio library
 pi = pigpio.pi()
-ir = ir_decoder.IRDecoder(pi, GPIO_PIN)
+
+# Ensure pigpio daemon is running
+if not pi.connected:
+    exit()
+
+# Callback function to handle IR signal
+def ir_callback(gpio, level, tick):
+    if level == 0:  # Signal received (falling edge)
+        print(f"Received signal at tick {tick}")
+
+# Set up the callback
+cb = pi.callback(IR_GPIO, pigpio.FALLING_EDGE, ir_callback)
+
+try:
+    print("Waiting for IR signal...")
+    while True:
+        time.sleep(1)
+
+except KeyboardInterrupt:
+    print("Exiting...")
+
+finally:
+    # Clean up
+    cb.cancel()
+    pi.stop()
