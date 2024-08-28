@@ -32,7 +32,7 @@ available_fonts = pygame.font.get_fonts()
 print(available_fonts)
 
 # Load fonts
-font = pygame.font.SysFont("freemono", 36)
+font = pygame.font.SysFont("freemono", 20)
 print("font worked")
 # font = pygame.font.Font(None, 36)
 
@@ -88,7 +88,7 @@ def update_display(temperature, humidity, widget_image):
     box_surface = pygame.Surface((info.current_w, info.current_h), pygame.SRCALPHA)
 
     # RGBA for box behind text
-    box_color = (61, 216, 255, 128) 
+    box_color = (61, 216, 255, 160) 
 
     # Text for temperature and humidity
     temp_hum_text = f"Temp: {temperature:.1f}°C  Humidity: {humidity:.1f}%"
@@ -108,7 +108,7 @@ def update_display(temperature, humidity, widget_image):
     # draw text on top of boxes 
     screen.blit(temp_hum_surface, temp_hum_box.topleft)
 
-    # Load and display the weather widget image
+    # Load and display the weather widget image 
     weather_widget = pygame.image.load(widget_image)
 
     # Set white color (255, 255, 255) as transparent in the weather widget image
