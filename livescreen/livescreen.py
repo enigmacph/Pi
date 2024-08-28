@@ -28,12 +28,12 @@ screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.mouse.set_visible(False)  # Hide the mouse cursor
 
 # get available fonts
-available_fonts = pygame.font.get_fonts()
-print(available_fonts)
+#available_fonts = pygame.font.get_fonts()
+#print(available_fonts)
 
 # Load fonts
-font = pygame.font.SysFont("freemono", 20)
-print("font worked")
+font = pygame.font.SysFont("freemono", 26)
+#print("font worked")
 # font = pygame.font.Font(None, 36)
 
 # Sensor setup
@@ -95,7 +95,7 @@ def update_display(temperature, humidity, widget_image):
     temp_hum_surface = font.render(temp_hum_text, True, (255, 255, 255))
 
     # Temperature and humidity box
-    temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 50))
+    temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 50)) # 
     pygame.draw.rect(box_surface, box_color, temp_hum_box.inflate(20, 20))
 
     # blit box under text onto main screen
