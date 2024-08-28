@@ -84,7 +84,7 @@ def update_display(temperature, humidity, widget_image):
     temp_hum_surface = font.render(temp_hum_text, True, (255, 255, 255))
 
     # Temperature and humidity box
-    temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 40))
+    temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 50))
     pygame.draw.rect(screen, box_color, temp_hum_box.inflate(20, 20))
 
     # draw text on top of boxes 
@@ -95,11 +95,11 @@ def update_display(temperature, humidity, widget_image):
 
     # crop top and bottom of image
     # Define the cropping rectangle (left, top, width, height)
-    #crop_rect = pygame.Rect(0, 360, 3258, 730)  # Adjust these values to your needs
-    #cropped_widget = weather_widget.subsurface(crop_rect)
+    crop_rect = pygame.Rect(0, 360, 3258, 730)  # Adjust these values to your needs
+    cropped_widget = weather_widget.subsurface(crop_rect).copy()
 
-    weather_widget = pygame.transform.scale(weather_widget, (892, 200))  # Resize as needed old 300 150
-    screen.blit(weather_widget, (info.current_w - 912, info.current_h - 230))  # Position on the screen
+    weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
+    screen.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
 
     pygame.display.flip()
 
