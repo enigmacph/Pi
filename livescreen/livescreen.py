@@ -77,14 +77,14 @@ def update_display(temperature, humidity, widget_image):
     screen.blit(background, (0, 0))
 
     # Draw semi-transparent boxes behind the text
-    box_color = (0, 0, 0, 128)  # RGBA: black with 50% transparency
+    box_color = (0, 0, 128, 64)  # RGBA: black with 50% transparency
 
     # Text for temperature and humidity
     temp_hum_text = f"Temp: {temperature:.1f}°C  Humidity: {humidity:.1f}%"
     temp_hum_surface = font.render(temp_hum_text, True, (255, 255, 255))
 
     # Temperature and humidity box
-    temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 60))
+    temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 40))
     pygame.draw.rect(screen, box_color, temp_hum_box.inflate(20, 20))
 
     # draw text on top of boxes 
@@ -99,7 +99,7 @@ def update_display(temperature, humidity, widget_image):
     #cropped_widget = weather_widget.subsurface(crop_rect)
 
     weather_widget = pygame.transform.scale(weather_widget, (892, 200))  # Resize as needed old 300 150
-    screen.blit(weather_widget, (info.current_w - 620, info.current_h - 330))  # Position on the screen
+    screen.blit(weather_widget, (info.current_w - 912, info.current_h - 230))  # Position on the screen
 
     pygame.display.flip()
 
