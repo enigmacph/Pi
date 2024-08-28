@@ -27,8 +27,14 @@ info = pygame.display.Info()
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.mouse.set_visible(False)  # Hide the mouse cursor
 
+# get available fonts
+available_fonts = pygame.font.get_fonts()
+print(available_fonts)
+
 # Load fonts
-font = pygame.font.Font(None, 36)
+font = pygame.font.SysFont("freemono", 36)
+print("font worked")
+# font = pygame.font.Font(None, 36)
 
 # Sensor setup
 # sensor = Adafruit_DHT.DHT22
@@ -95,6 +101,10 @@ def update_display(temperature, humidity, widget_image):
     # blit box under text onto main screen
     screen.blit(box_surface, (0,0))
 
+    # get size of box behind text
+    text_rect = temp_hum_surface.get_rect()
+    print(f"Weather widget dimensions: {text_rect.width}x{text_rect.height}")
+
     # draw text on top of boxes 
     screen.blit(temp_hum_surface, temp_hum_box.topleft)
 
@@ -105,9 +115,9 @@ def update_display(temperature, humidity, widget_image):
     # weather_widget.set_colorkey((255, 255, 255))
 
     # Print dimensions of the weather widget image
-    widget_rect = weather_widget.get_rect() # dimensions 782x391
-    print("at least we got to here")
-    print(f"Weather widget dimensions: {widget_rect.width}x{widget_rect.height}")
+    # widget_rect = weather_widget.get_rect() # dimensions 782x391
+    # print("at least we got to here")
+    # print(f"Weather widget dimensions: {widget_rect.width}x{widget_rect.height}")
 
     # crop top and bottom of image
     # Define the cropping rectangle (left, top, width, height)
@@ -125,7 +135,7 @@ def main():
     humidity = 0
     temperature = 0
     while True:
-        print("now we are here")
+        #print("now we are here")
         prev_humidity = humidity
         prev_temperature = temperature
 
@@ -139,7 +149,7 @@ def main():
 
         if widget_image:
             update_display(temperature, humidity, widget_image)
-        print("got here")
+        #print("got here")
         time.sleep(10)  # Change background every 60 seconds
 
 if __name__ == "__main__":
