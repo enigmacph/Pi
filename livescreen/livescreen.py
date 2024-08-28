@@ -47,8 +47,8 @@ def sanitize_svg(svg_content):
     return sanitized_svg.encode('utf-8')
 
 def fetch_weather_widget():
-    # widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?mode=dark"  # copenhagen dark mode svg
-    widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?"  # not dark mode lol
+    widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?mode=dark"  # copenhagen dark mode svg
+    # widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?"  # not dark mode lol
 
     response = requests.get(widget_url)
     
@@ -102,7 +102,7 @@ def update_display(temperature, humidity, widget_image):
     weather_widget = pygame.image.load(widget_image)
 
     # Set white color (255, 255, 255) as transparent in the weather widget image
-    weather_widget.set_colorkey((255, 255, 255))
+    # weather_widget.set_colorkey((255, 255, 255))
 
     # Print dimensions of the weather widget image
     widget_rect = weather_widget.get_rect() # dimensions 782x391
@@ -116,8 +116,8 @@ def update_display(temperature, humidity, widget_image):
     
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
 
-    box_surface.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
-    screen.blit(box_surface, (0,0))
+    screen.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
+    # screen.blit(box_surface, (0,0))
 
     pygame.display.flip()
 
