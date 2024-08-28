@@ -93,12 +93,21 @@ def update_display(temperature, humidity, widget_image):
     # Load and display the weather widget image
     weather_widget = pygame.image.load(widget_image)
 
+    # Print dimensions of the weather widget image
+    widget_rect = weather_widget.get_rect()
+    print(f"Weather widget dimensions: {widget_rect.width}x{widget_rect.height}")
+
     # crop top and bottom of image
     # Define the cropping rectangle (left, top, width, height)
     crop_rect = pygame.Rect(0, 360, 3258, 730)  # Adjust these values to your needs
     cropped_widget = weather_widget.subsurface(crop_rect).copy()
+    cropped_widget = weather_widget.get_rect()
+    print(f"Cropped widget dimensions: {widget_rect.width}x{widget_rect.height}")
 
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
+    widget_rect = weather_widget.get_rect()
+    print(f"Weather widget after cropping dimensions: {widget_rect.width}x{widget_rect.height}")
+
     screen.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
 
     pygame.display.flip()
