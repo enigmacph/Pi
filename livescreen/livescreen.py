@@ -47,7 +47,9 @@ def sanitize_svg(svg_content):
     return sanitized_svg.encode('utf-8')
 
 def fetch_weather_widget():
-    widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?mode=dark"  # Replace with your specific SVG widget URL
+    # widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?mode=dark"  # copenhagen dark mode svg
+    widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?"  # not dark mode lol
+
     response = requests.get(widget_url)
     
     if response.status_code == 200:
@@ -80,7 +82,7 @@ def update_display(temperature, humidity, widget_image):
     box_surface = pygame.Surface((info.current_w, info.current_h), pygame.SRCALPHA)
 
     # RGBA for box behind text
-    box_color = (0, 0, 64, 128) 
+    box_color = (61, 216, 255, 128) 
 
     # Text for temperature and humidity
     temp_hum_text = f"Temp: {temperature:.1f}°C  Humidity: {humidity:.1f}%"
