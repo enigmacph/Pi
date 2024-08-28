@@ -76,8 +76,11 @@ def update_display(temperature, humidity, widget_image):
     background = pygame.transform.scale(background, (info.current_w, info.current_h))
     screen.blit(background, (0, 0))
 
-    # Draw semi-transparent boxes behind the text
-    box_color = (0, 0, 64, 128)  # RGBA: black with 50% transparency
+    # Create a surface for the semi-transparent box
+    box_surface = pygame.Surface((info.current_w, info.current_h), pygame.SRCALPHA)
+
+    # RGBA for box behind text
+    box_color = (0, 0, 64, 128) 
 
     # Text for temperature and humidity
     temp_hum_text = f"Temp: {temperature:.1f}°C  Humidity: {humidity:.1f}%"
@@ -85,7 +88,10 @@ def update_display(temperature, humidity, widget_image):
 
     # Temperature and humidity box
     temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 50))
-    pygame.draw.rect(screen, box_color, temp_hum_box.inflate(20, 20))
+    pygame.draw.rect(box_surface, box_color, temp_hum_box.inflate(20, 20))
+
+    # blit box under text onto main screen
+    screen.blit(box_surface, (0,0))
 
     # draw text on top of boxes 
     screen.blit(temp_hum_surface, temp_hum_box.topleft)
@@ -102,12 +108,8 @@ def update_display(temperature, humidity, widget_image):
     # Define the cropping rectangle (left, top, width, height)
     crop_rect = pygame.Rect(0, 86, 782, 176)  # crop to 782x179
     cropped_widget = weather_widget.subsurface(crop_rect).copy()
-    #cropped_widget = weather_widget.get_rect()
-    #print(f"Cropped widget dimensions: {widget_rect.width}x{widget_rect.height}")
-
+    
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
-    widget_rect = weather_widget.get_rect()
-    print(f"Weather widget after cropping dimensions: {widget_rect.width}x{widget_rect.height}")
 
     screen.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
 
