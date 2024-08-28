@@ -77,7 +77,7 @@ def update_display(temperature, humidity, widget_image):
     screen.blit(background, (0, 0))
 
     # Draw semi-transparent boxes behind the text
-    box_color = (0, 0, 128, 64)  # RGBA: black with 50% transparency
+    box_color = (0, 0, 64, 128)  # RGBA: black with 50% transparency
 
     # Text for temperature and humidity
     temp_hum_text = f"Temp: {temperature:.1f}°C  Humidity: {humidity:.1f}%"
@@ -95,6 +95,7 @@ def update_display(temperature, humidity, widget_image):
 
     # Print dimensions of the weather widget image
     widget_rect = weather_widget.get_rect()
+    print("at least we got to here")
     print(f"Weather widget dimensions: {widget_rect.width}x{widget_rect.height}")
 
     # crop top and bottom of image
@@ -116,7 +117,7 @@ def main():
     humidity = 0
     temperature = 0
     while True:
-
+        print("now we are here")
         prev_humidity = humidity
         prev_temperature = temperature
 
@@ -130,7 +131,7 @@ def main():
 
         if widget_image:
             update_display(temperature, humidity, widget_image)
-
+        print("got here")
         time.sleep(10)  # Change background every 60 seconds
 
 if __name__ == "__main__":
