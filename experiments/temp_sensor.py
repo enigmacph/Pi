@@ -31,7 +31,7 @@ def read_dht11():
         # print(f'Temperature: {temperature:.1f} degrees')
         # print(f'Humidity: {humidity:.1f}%')
         current_time = time.time()
-        if humidity > 50 and (current_time - last_played_time) >= 3600:
+        if humidity > 80 and (current_time - last_played_time) >= 3600:
             play_sound()
             last_played_time = current_time
     else:

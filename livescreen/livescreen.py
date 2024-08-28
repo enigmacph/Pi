@@ -23,7 +23,8 @@ pin = 4  # Replace with the GPIO pin number you used (e.g., GPIO4 corresponds to
 os.environ["DISPLAY"] = ":0"
 pygame.init()
 info = pygame.display.Info()
-screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.NOFRAME)
+# screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.NOFRAME)
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.mouse.set_visible(False)  # Hide the mouse cursor
 
 # Load fonts
@@ -103,22 +104,24 @@ def update_display(temperature, humidity, widget_image):
     pygame.display.flip()
 
 def main():
+    humidity = 0
+    temperature = 0
     while True:
-        # temperature, humidity = read_sensor()
 
-        for i in range(0, 5):
-            humidity, temperature = Adafruit_DHT.read(sensor, pin)
-            time.sleep(0.1)
+        prev_humidity = humidity
+        prev_temperature = temperature
 
-        if type(humidity) != "float":
-            humidity = 0
+        humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 
-        if type(temperature) != "float":
-            temperature = 0
+        if type(humidity) != float:
+            humidity = prev_humidity
+            temperature = prev_temperature
 
         widget_image = fetch_weather_widget()
 
-        update_display(temperature, humidity, widget_image)
+        if widget_image:
+            update_display(temperature, humidity, widget_image)
+
         time.sleep(10)  # Change background every 60 seconds
 
 if __name__ == "__main__":

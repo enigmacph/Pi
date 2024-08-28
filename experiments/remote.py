@@ -1,13 +1,34 @@
-import RPi.GPIO as GPIO
-import time
+#!/usr/bin/python
+import evdev
+from time import sleep
 
-# Set up GPIO
-GPIO.setmode(GPIO.BCM)  # Use BCM numbering
-GPIO.setup(14, GPIO.IN)  # Set GPIO pin 14 as input (You can change this to any GPIO pin you are using)
+# returns path of gpio ir receiver device
+def get_ir_device():
+    devices = [evdev.InputDevice(path) for path in evdev.list_devices()]
+    for device in devices:
+        if (device.name == "gpio_ir_recv"):
+            print("Using device", device.path, "\n")
+            return device
 
-while True:
-    if GPIO.input(14) == 0:  # Assuming the module outputs LOW when an IR signal is detected
-        print("IR signal detected!")
-        time.sleep(0.2)  # Add a small delay to avoid overwhelming the console with messages
-    else:
-        time.sleep(0.1)  # Add a small delay to prevent excessive CPU usage
+    print("No device found!")
+    sys.exit()
+
+# returns the next InputEvent instance
+# blocks until event is available
+def get_next_event(dev):
+    while(True):
+        event = dev.read_one()
+        if (event):
+            return event
+
+def main():
+    device = get_ir_device()
+
+    while True:
+        print("Waiting indefinitely for IR signals.  The first received command will be returned.")
+        next_event = get_next_event(device)
+
+        print("Received command:", next_event.value, "\n")
+
+if __name__ == "__main__":
+    main()
