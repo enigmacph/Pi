@@ -8,6 +8,8 @@ import io
 import re
 import random
 
+import todaydie
+
 import Adafruit_DHT
 import time
 
@@ -20,27 +22,20 @@ sensor = Adafruit_DHT.DHT11
 pin = 4  # Replace with the GPIO pin number you used (e.g., GPIO4 corresponds to pin 7)
 
 ## Initialize pygame
-os.environ["DISPLAY"] = ":0"
+os.environ["DISPLAY"] = ":0" # set display
 pygame.init()
-info = pygame.display.Info()
-# screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.NOFRAME)
+info = pygame.display.Info() # get screen size
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.mouse.set_visible(False)  # Hide the mouse cursor
 
-# get available fonts
-#available_fonts = pygame.font.get_fonts()
-#print(available_fonts)
-
-# Load fonts
-font = pygame.font.SysFont("freemono", 26)
-#print("font worked")
-# font = pygame.font.Font(None, 36)
+# set cool font
+font = pygame.font.SysFont("freemono", 26) 
 
 # Sensor setup
 # sensor = Adafruit_DHT.DHT22
 pin = 4
 
-# Path to your images folder
+# Path to wallpaper folder
 image_folder = "/home/pi/wallpapers"
 
 def get_next_image():
@@ -90,44 +85,25 @@ def update_display(temperature, humidity, widget_image):
     # RGBA for box behind text
     box_color = (61, 216, 255, 160) 
 
-    # Text for temperature and humidity
-    temp_hum_text = f"Temp: {temperature:.1f}°C  Humidity: {humidity:.1f}%"
+    # adding box with temperature and humidity
+    temp_hum_text = f"Temp: {temperature:.1f}°C  Humidity: {humidity:.1f}%" # Text for temperature and humidity
     temp_hum_surface = font.render(temp_hum_text, True, (255, 255, 255))
 
-    # Temperature and humidity box
-    temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 50)) # 
-    pygame.draw.rect(box_surface, box_color, temp_hum_box.inflate(20, 20))
+    temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 50)) # Temperature and humidity box : dimensions = 464x27
+    pygame.draw.rect(box_surface, box_color, temp_hum_box.inflate(20, 20)) # 484x47
 
-    # blit box under text onto main screen
-    screen.blit(box_surface, (0,0))
+    screen.blit(box_surface, (0,0)) # blit box under text onto main screen
+    screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw text on top of boxes 
 
-    # get size of box behind text
-    text_rect = temp_hum_surface.get_rect()
-    print(f"Weather widget dimensions: {text_rect.width}x{text_rect.height}")
-
-    # draw text on top of boxes 
-    screen.blit(temp_hum_surface, temp_hum_box.topleft)
-
-    # Load and display the weather widget image 
-    weather_widget = pygame.image.load(widget_image)
-
-    # Set white color (255, 255, 255) as transparent in the weather widget image
-    # weather_widget.set_colorkey((255, 255, 255))
-
-    # Print dimensions of the weather widget image
-    # widget_rect = weather_widget.get_rect() # dimensions 782x391
-    # print("at least we got to here")
-    # print(f"Weather widget dimensions: {widget_rect.width}x{widget_rect.height}")
+    # adding weather widget from YR.no
+    weather_widget = pygame.image.load(widget_image) # Load and display the weather widget image 
 
     # crop top and bottom of image
-    # Define the cropping rectangle (left, top, width, height)
-    crop_rect = pygame.Rect(0, 86, 782, 176)  # crop to 782x179
+    crop_rect = pygame.Rect(0, 86, 782, 176)  # crop to 782x179 - Define the cropping rectangle (left, top, width, height)
     cropped_widget = weather_widget.subsurface(crop_rect).copy()
     
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
-
     screen.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
-    # screen.blit(box_surface, (0,0))
 
     pygame.display.flip()
 
@@ -149,6 +125,9 @@ def main():
 
         if widget_image:
             update_display(temperature, humidity, widget_image)
+            die = todaydie.die_check()
+
+            print(die)
         #print("got here")
         time.sleep(10)  # Change background every 60 seconds
 
