@@ -96,8 +96,8 @@ def update_display(temperature, humidity, widget_image):
     screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw text on top of boxes 
 
     # Today's die
-    #die = todaydie.die_check()
-    #die_text = f"Today's die rolled: {die}"
+    die = todaydie.die_check()
+    die_text = f"Today's die rolled: {die}"
     #temp_die_surface = font.render(die_text, True, (255, 255, 255))
 
     #temp_die_box = temp_die_surface.get_rect(topleft=(info.current_h - 1000, info.current_h - 500)) # position of die box

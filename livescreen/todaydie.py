@@ -29,4 +29,3 @@ def die_check():
         save_roll(today, last_roll_value) # save out today's roll
 
     return last_roll_value
-
