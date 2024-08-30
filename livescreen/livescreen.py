@@ -96,22 +96,25 @@ def update_display(temperature, humidity, widget_image):
     screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw text on top of boxes 
 
     # Today's die
-    die = todaydie.die_check()
-    die_text = f"Today's die rolled: {die}"
-    temp_die_surface = font.render(die_text, True, (255, 255, 255))
+    #die = todaydie.die_check()
+    #die_text = f"Today's die rolled: {die}"
+    #temp_die_surface = font.render(die_text, True, (255, 255, 255))
 
-    temp_die_box = temp_die_surface.get_rect(topleft=(info.current_h - 1000, info.current_h - 500)) # position of die box
-    pygame.draw.rect(box_surface, box_color, temp_die_box.inflate(20, 20))
+    #temp_die_box = temp_die_surface.get_rect(topleft=(info.current_h - 1000, info.current_h - 500)) # position of die box
+    #pygame.draw.rect(box_surface, box_color, temp_die_box.inflate(20, 20))
 
-    screen.blit(box_surface, (0,0))
-    screen.blit(temp_die_surface, temp_die_box.topleft)
+    #screen.blit(box_surface, (0,0))
+    #screen.blit(temp_die_surface, temp_die_box.topleft)
 
     # adding weather widget from YR.no
     weather_widget = pygame.image.load(widget_image) # Load and display the weather widget image 
 
     # crop top and bottom of image
     crop_rect = pygame.Rect(0, 86, 782, 176)  # crop to 782x179 - Define the cropping rectangle (left, top, width, height)
-    cropped_widget = weather_widget.subsurface(crop_rect).copy()
+    try: 
+        cropped_widget = weather_widget.subsurface(crop_rect).copy() # subsurface crashes script if rect is larger than weather_widget
+    except:
+        cropped_widget = weather_widget
     
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
     screen.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
