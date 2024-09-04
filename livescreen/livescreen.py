@@ -72,7 +72,7 @@ def fetch_weather_widget():
 
 def update_display(temperature, humidity, widget_image):
     screen.fill((0,0,0)) # clear screen
-
+    
     # Load and display background image
     image_path = get_next_image()
     background = pygame.image.load(image_path)
@@ -93,18 +93,18 @@ def update_display(temperature, humidity, widget_image):
     pygame.draw.rect(box_surface, box_color, temp_hum_box.inflate(20, 20)) # 484x47
 
     screen.blit(box_surface, (0,0)) # blit box under text onto main screen
-    screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw text on top of boxes 
+    screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw text on top of boxes
 
     # Today's die
-    #die = todaydie.die_check() # this crashes as permission to write to file is missing
-    #die_text = f"Today's die rolled: {die}"
-    #temp_die_surface = font.render(die_text, True, (255, 255, 255))
+    die = todaydie.die_check() # generate today roll from using date as seed
+    die_text = f"Today's die rolled: {die}"
+    temp_die_surface = font.render(die_text, True, (255, 255, 255))
 
-    #temp_die_box = temp_die_surface.get_rect(topleft=(info.current_h - 1000, info.current_h - 500)) # position of die box
-    #pygame.draw.rect(box_surface, box_color, temp_die_box.inflate(20, 20))
+    temp_die_box = temp_die_surface.get_rect(topleft=(info.current_h - 1000, info.current_h - 500)) # position of die box
+    pygame.draw.rect(box_surface, box_color, temp_die_box.inflate(20, 20))
 
-    #screen.blit(box_surface, (0,0))
-    #screen.blit(temp_die_surface, temp_die_box.topleft)
+    screen.blit(box_surface, (0,0))
+    screen.blit(temp_die_surface, temp_die_box.topleft)
 
     # adding weather widget from YR.no
     weather_widget = pygame.image.load(widget_image) # Load and display the weather widget image 
