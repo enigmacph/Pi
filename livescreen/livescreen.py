@@ -92,8 +92,8 @@ def update_display(temperature, humidity, widget_image):
     temp_hum_box = temp_hum_surface.get_rect(topleft=(400, info.current_h - 50)) # Temperature and humidity box : dimensions = 464x27
     pygame.draw.rect(box_surface, box_color, temp_hum_box.inflate(20, 20)) # 484x47
 
-    screen.blit(box_surface, (0,0)) # blit box under text onto main screen
-    screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw text on top of boxes
+    # screen.blit(box_surface, (0,0)) # blit box under text onto main screen
+    # screen.blit(temp_hum_surface, temp_hum_box.topleft)
 
     # Today's die text and box
     die = todaydie.die_check() # generate today roll from using date as seed
@@ -105,7 +105,8 @@ def update_display(temperature, humidity, widget_image):
 
     # add box and text
     screen.blit(box_surface, (0,0))
-    screen.blit(die_surface, die_box.topleft) # draw text on top
+    screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw temp and hum text
+    screen.blit(die_surface, die_box.topleft) # draw die roll text
 
     # today die image
     die_image_path = "/home/pi/Python/Pi/livescreen/d20.png"
@@ -147,7 +148,7 @@ def main():
         if widget_image:
             update_display(temperature, humidity, widget_image)
 
-        time.sleep(10)  # Change background every 60 seconds
+        time.sleep(60)  # Change background every 60 seconds
 
 if __name__ == "__main__":
     main()
