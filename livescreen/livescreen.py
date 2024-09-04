@@ -86,7 +86,7 @@ def update_display(temperature, humidity, widget_image):
     box_color = (61, 216, 255, 160) 
 
     # adding box with temperature and humidity
-    temp_hum_text = f"Temp: {temperature:.1f}°C  Humidity: {humidity:.1f}%" # Text for temperature and humidity
+    temp_hum_text = f"Temp: {temperature}°C  Humidity: {humidity}%" # Text for temperature and humidity
     temp_hum_surface = font.render(temp_hum_text, True, (255, 255, 255))
 
     temp_hum_box = temp_hum_surface.get_rect(topleft=(400, info.current_h - 50)) # Temperature and humidity box : dimensions = 464x27
@@ -104,7 +104,7 @@ def update_display(temperature, humidity, widget_image):
     pygame.draw.rect(box_surface, box_color, die_box.inflate(20, 20))
 
     # add box and text
-    screen.blit(box_surface, (0,0))
+    screen.blit(box_surface, (0,0)) # this draws boxes for both temp and hum, and die roll
     screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw temp and hum text
     screen.blit(die_surface, die_box.topleft) # draw die roll text
 
