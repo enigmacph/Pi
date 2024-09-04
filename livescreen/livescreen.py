@@ -96,7 +96,7 @@ def update_display(temperature, humidity, widget_image):
     screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw text on top of boxes
 
     # Today's die
-    die_image_path = "/home/Python/Pi/livescreen/d20.png"
+    die_image_path = "~/Python/Pi/livescreen/d20.png"
     die_image = pygame.image.load(die_image_path)
     screen.blit(die_image, (0, 0))
 
