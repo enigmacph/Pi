@@ -89,30 +89,29 @@ def update_display(temperature, humidity, widget_image):
     temp_hum_text = f"Temp: {temperature:.1f}°C  Humidity: {humidity:.1f}%" # Text for temperature and humidity
     temp_hum_surface = font.render(temp_hum_text, True, (255, 255, 255))
 
-    temp_hum_box = temp_hum_surface.get_rect(topleft=(20, info.current_h - 50)) # Temperature and humidity box : dimensions = 464x27
+    temp_hum_box = temp_hum_surface.get_rect(topleft=(256, info.current_h - 50)) # Temperature and humidity box : dimensions = 464x27
     pygame.draw.rect(box_surface, box_color, temp_hum_box.inflate(20, 20)) # 484x47
 
     screen.blit(box_surface, (0,0)) # blit box under text onto main screen
     screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw text on top of boxes
 
-    # Today's die
-    die_image_path = "/home/pi/Python/Pi/livescreen/d20.png"
-    die_image = pygame.image.load(die_image_path)
-    screen.blit(die_image, (0, 0))
-
+    # Today's die text and box
     die = todaydie.die_check() # generate today roll from using date as seed
     die_text = f"Today's die roll: {die}"
     temp_die_surface = font.render(die_text, True, (255, 255, 255))
 
-    temp_die_box = temp_die_surface.get_rect(topleft=(info.current_h - 1000, info.current_h - 500)) # position of die box
+    temp_die_box = temp_die_surface.get_rect(topleft=(20, info.current_h - 50)) # position of die box
     pygame.draw.rect(box_surface, box_color, temp_die_box.inflate(20, 20))
 
     # add box and text
     screen.blit(box_surface, (0,0))
     screen.blit(temp_die_surface, temp_die_box.topleft) # draw text on top
 
-    # add image of die
-
+    # today die image
+    die_image_path = "/home/pi/Python/Pi/livescreen/d20.png"
+    die_image = pygame.image.load(die_image_path)
+    die_image = pygame.transform.scale(die_image, (150, 150)) # resize from 400x400 to 150x150
+    screen.blit(die_image, (20, info.current_h - 200)) # position of die image
 
     # adding weather widget from YR.no
     weather_widget = pygame.image.load(widget_image) # Load and display the weather widget image 
