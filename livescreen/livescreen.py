@@ -96,15 +96,23 @@ def update_display(temperature, humidity, widget_image):
     screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw text on top of boxes
 
     # Today's die
+    die_image_path = "/home/Python/Pi/livescreen/d20.png"
+    die_image = pygame.image.load(die_image_path)
+    screen.blit(die_image, (0, 0))
+
     die = todaydie.die_check() # generate today roll from using date as seed
-    die_text = f"Today's die rolled: {die}"
+    die_text = f"Today's die roll: {die}"
     temp_die_surface = font.render(die_text, True, (255, 255, 255))
 
     temp_die_box = temp_die_surface.get_rect(topleft=(info.current_h - 1000, info.current_h - 500)) # position of die box
     pygame.draw.rect(box_surface, box_color, temp_die_box.inflate(20, 20))
 
+    # add box and text
     screen.blit(box_surface, (0,0))
-    screen.blit(temp_die_surface, temp_die_box.topleft)
+    screen.blit(temp_die_surface, temp_die_box.topleft) # draw text on top
+
+    # add image of die
+
 
     # adding weather widget from YR.no
     weather_widget = pygame.image.load(widget_image) # Load and display the weather widget image 
