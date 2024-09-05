@@ -133,7 +133,7 @@ def main():
     humidity = 0
     temperature = 0
     while True:
-        #print("now we are here")
+        print("now we are here")
         prev_humidity = humidity
         prev_temperature = temperature
 
