@@ -142,9 +142,9 @@ def main():
         if type(humidity) != float:
             humidity = prev_humidity
             temperature = prev_temperature
-
+        print("getting weather")
         widget_image = fetch_weather_widget()
-
+        print("updating screen")        
         if widget_image:
             update_display(temperature, humidity, widget_image)
 
