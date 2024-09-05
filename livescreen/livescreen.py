@@ -133,7 +133,7 @@ def main():
     humidity = 0
     temperature = 0
     while True:
-        print("now we are here")
+        #print("now we are here")
         prev_humidity = humidity
         prev_temperature = temperature
 
@@ -142,13 +142,13 @@ def main():
         if type(humidity) != float:
             humidity = prev_humidity
             temperature = prev_temperature
-        print("getting weather")
+        #print("getting weather")
         widget_image = fetch_weather_widget()
-        print("updating screen")        
+        #print("updating screen")        
         if widget_image:
             update_display(temperature, humidity, widget_image)
 
-        time.sleep(1)  # Change background every 60 seconds
+        time.sleep(20)  # Change background every 60 seconds
 
 if __name__ == "__main__":
     main()
