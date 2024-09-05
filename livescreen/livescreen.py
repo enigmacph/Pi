@@ -148,7 +148,7 @@ def main():
         if widget_image:
             update_display(temperature, humidity, widget_image)
 
-        time.sleep(60)  # Change background every 60 seconds
+        time.sleep(1)  # Change background every 60 seconds
 
 if __name__ == "__main__":
     main()
