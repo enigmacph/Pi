@@ -14,5 +14,7 @@ def die_check():
     
     # Roll the die
     today_roll = roll_die()
+
+    random.seed() # resets seed for background
     
     return today_roll
