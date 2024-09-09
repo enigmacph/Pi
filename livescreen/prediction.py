@@ -46,6 +46,6 @@ def pick_random_prediction():
         new_prob = "Unknown new probability"
 
     # Return a list containing the source, question, and probabilities
-    result = [f"Market: {source}", f"Q: {question}", f"Probability: {previous_prob} -> {new_prob}"]
+    result = [f"Market: {source}", f"{question}", f"{previous_prob} -> {new_prob}"]
     
     return result

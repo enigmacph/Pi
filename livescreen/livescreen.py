@@ -118,12 +118,12 @@ def update_display(temperature, humidity, widget_image):
 
     # adding question
     prediction_q_surface = font.render(prediction_question_text, True, (255, 255, 255))
-    prediction_q_box = prediction_q_surface.get_rect(topleft=(20, 100)) # upper left hand corner
+    prediction_q_box = prediction_q_surface.get_rect(topleft=(20, 55)) # upper left hand corner
     pygame.draw.rect(box_surface, box_color, prediction_q_box).inflate(20, 20)
 
     # adding percent
     prediction_p_surface = font.render(prediction_percent_text, True, (255, 255, 255))
-    prediction_p_box = prediction_p_surface.get_rect(topleft=(20, 200)) # upper left hand corner
+    prediction_p_box = prediction_p_surface.get_rect(topleft=(20, 90)) # upper left hand corner
     pygame.draw.rect(box_surface, box_color, prediction_p_box).inflate(20, 20)
 
     # add box and text
@@ -161,7 +161,7 @@ def main():
     humidity = 0
     temperature = 0
     while True:
-        print("now we are here")
+        # print("now we are here")
         prev_humidity = humidity
         prev_temperature = temperature
 
@@ -172,7 +172,7 @@ def main():
             temperature = prev_temperature
         # print("getting weather")
         widget_image = fetch_weather_widget()
-        print("updating screen")        
+        # print("updating screen")        
         if widget_image:
             update_display(temperature, humidity, widget_image)
 
