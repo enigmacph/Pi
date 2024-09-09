@@ -104,10 +104,17 @@ def update_display(temperature, humidity, widget_image):
     die_box = die_surface.get_rect(topleft=(20, info.current_h - 50)) # position of die box
     pygame.draw.rect(box_surface, box_color, die_box.inflate(20, 20))
 
+    # getting prediction market result
+    current_prediction_text = prediction.pick_random_prediction()
+    prediction_surface = font.render(current_prediction_text, True, (255, 255, 255))
+    prediction_box = prediction_surface.get_rect(topleft=(20, 20)) # upper left hand corner
+    pygame.draw.rect(box_surface, box_color, prediction_box).inflate(20, 20)
+
     # add box and text
     screen.blit(box_surface, (0,0)) # this draws boxes for both temp and hum, and die roll
     screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw temp and hum text
     screen.blit(die_surface, die_box.topleft) # draw die roll text
+    screen.blit(prediction_surface, prediction_box.topleft) # add prediction text
 
     # today die image
     die_image_path = "/home/pi/Python/Pi/livescreen/d20.png"
@@ -127,9 +134,6 @@ def update_display(temperature, humidity, widget_image):
     
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
     screen.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
-    # getting prediction
-    current_prediction = prediction.pick_random_prediction()
-    print(current_prediction)
 
     pygame.display.flip()
 

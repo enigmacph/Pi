@@ -10,8 +10,12 @@ def get_predictions():
     with open(path, 'r') as file:
         data = json.load(file)  # Load JSON data into a Python dictionary
 
-        # Extract only the list of market movements from manifold only
-        market_movements = data["manifold"]
+        # Extract only the list of market movements from manifold and metaculus 
+        market_movements_manifold = data["manifold"]
+        market_movements_metaculus = data["metaculus"]
+
+        # concatenate results from manifold and metaculus
+        market_movements = market_movements_manifold + market_movements_metaculus 
 
     return market_movements
 
