@@ -9,6 +9,7 @@ import re
 import random
 
 import todaydie
+import prediction
 
 import Adafruit_DHT
 import time
@@ -126,6 +127,9 @@ def update_display(temperature, humidity, widget_image):
     
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
     screen.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
+
+    current_prediction = prediction.pick_random_prediction()
+    print(current_prediction)
 
     pygame.display.flip()
 
