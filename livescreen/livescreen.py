@@ -106,15 +106,35 @@ def update_display(temperature, humidity, widget_image):
 
     # getting prediction market result
     current_prediction_text = prediction.pick_random_prediction()
-    prediction_surface = font.render(current_prediction_text, True, (255, 255, 255))
-    prediction_box = prediction_surface.get_rect(topleft=(20, 20)) # upper left hand corner
-    pygame.draw.rect(box_surface, box_color, prediction_box).inflate(20, 20)
+
+    prediction_market_text = current_prediction_text[0]
+    prediction_question_text = current_prediction_text[1]
+    prediction_percent_text = current_prediction_text[2]
+    
+    # adding market
+    prediction_m_surface = font.render(prediction_market_text, True, (255, 255, 255))
+    prediction_m_box = prediction_m_surface.get_rect(topleft=(20, 20)) # upper left hand corner
+    pygame.draw.rect(box_surface, box_color, prediction_m_box).inflate(20, 20)
+
+    # adding question
+    prediction_q_surface = font.render(prediction_question_text, True, (255, 255, 255))
+    prediction_q_box = prediction_q_surface.get_rect(topleft=(20, 100)) # upper left hand corner
+    pygame.draw.rect(box_surface, box_color, prediction_q_box).inflate(20, 20)
+
+    # adding percent
+    prediction_p_surface = font.render(prediction_percent_text, True, (255, 255, 255))
+    prediction_p_box = prediction_p_surface.get_rect(topleft=(20, 200)) # upper left hand corner
+    pygame.draw.rect(box_surface, box_color, prediction_p_box).inflate(20, 20)
 
     # add box and text
     screen.blit(box_surface, (0,0)) # this draws boxes for both temp and hum, and die roll
     screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw temp and hum text
     screen.blit(die_surface, die_box.topleft) # draw die roll text
-    screen.blit(prediction_surface, prediction_box.topleft) # add prediction text
+    screen.blit(prediction_m_surface, prediction_m_box.topleft) # add prediction market
+    screen.blit(prediction_q_surface, prediction_q_box.topleft) # add prediction question
+    screen.blit(prediction_p_surface, prediction_p_box.topleft) # add prediction percent
+
+
 
     # today die image
     die_image_path = "/home/pi/Python/Pi/livescreen/d20.png"
