@@ -127,7 +127,7 @@ def update_display(temperature, humidity, widget_image):
     
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
     screen.blit(weather_widget, (info.current_w - 912, info.current_h - 220))  # Position on the screen
-
+    # getting prediction
     current_prediction = prediction.pick_random_prediction()
     print(current_prediction)
 
@@ -137,7 +137,7 @@ def main():
     humidity = 0
     temperature = 0
     while True:
-        # print("now we are here")
+        print("now we are here")
         prev_humidity = humidity
         prev_temperature = temperature
 
@@ -148,7 +148,7 @@ def main():
             temperature = prev_temperature
         # print("getting weather")
         widget_image = fetch_weather_widget()
-        # print("updating screen")        
+        print("updating screen")        
         if widget_image:
             update_display(temperature, humidity, widget_image)
 
