@@ -80,6 +80,11 @@ def update_display(temperature, humidity, widget_image):
     background = pygame.transform.scale(background, (info.current_w, info.current_h))
     screen.blit(background, (0, 0))
 
+    # nice background graphics
+    overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
+    overlay_image = pygame.image.load(die_image_path) # 1920x1080
+    screen.blit(overlay_image, (0, 0)) # position of die image
+
     # Create a surface for the semi-transparent box
     box_surface = pygame.Surface((info.current_w, info.current_h), pygame.SRCALPHA)
 
@@ -127,14 +132,12 @@ def update_display(temperature, humidity, widget_image):
     pygame.draw.rect(box_surface, box_color, prediction_p_box).inflate(20, 20)
 
     # add box and text
-    screen.blit(box_surface, (0,0)) # this draws boxes for both temp and hum, and die roll
+    # screen.blit(box_surface, (0,0)) # this draws boxes for both temp and hum, and die roll
     screen.blit(temp_hum_surface, temp_hum_box.topleft) # draw temp and hum text
     screen.blit(die_surface, die_box.topleft) # draw die roll text
     screen.blit(prediction_m_surface, prediction_m_box.topleft) # add prediction market
     screen.blit(prediction_q_surface, prediction_q_box.topleft) # add prediction question
     screen.blit(prediction_p_surface, prediction_p_box.topleft) # add prediction percent
-
-
 
     # today die image
     die_image_path = "/home/pi/Python/Pi/livescreen/d20.png"
