@@ -82,7 +82,7 @@ def update_display(temperature, humidity, widget_image):
 
     # nice background graphics
     overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
-    overlay_image = pygame.image.load(die_image_path) # 1920x1080
+    overlay_image = pygame.image.load(overlay_path) # 1920x1080
     screen.blit(overlay_image, (0, 0)) # position of die image
 
     # Create a surface for the semi-transparent box
