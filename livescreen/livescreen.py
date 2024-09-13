@@ -114,6 +114,7 @@ def update_display(temperature, humidity, widget_image):
 
     prediction_market_text = current_prediction_text[0]
     prediction_question_text = current_prediction_text[1]
+    prediction_question_text = re.sub(r'[^\u0000-\uFFFF]', '', prediction_question_text)
     prediction_percent_text = current_prediction_text[2]
     
     # adding market
