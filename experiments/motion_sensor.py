@@ -24,5 +24,5 @@ time.sleep(2)  # Give time for the sensor to stabilize
 while True:
     if GPIO.input(PIR_PIN):
         play_sound()
-        time.sleep(2)
+        time.sleep(5)
     time.sleep(1)
