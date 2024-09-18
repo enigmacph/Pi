@@ -134,8 +134,10 @@ def main():
     while True:
         if first_run:
             screen.fill((0,0,0)) # clear screen
-            loader_surface = font.render("loading...", True, (255, 255, 255))
-            screen.blit(loader_surface, (10, 10))
+            loader1_surface = font.render("initializing...", True, (255, 255, 255))
+            screen.blit(loader1_surface, (5, 5))
+            loader2_surface = font.render("getting temperature and humidity...", True, (255, 255, 255))
+            screen.blit(loader2_surface, (5, 35))
             pygame.display.flip()
 
         prev_humidity = humidity
@@ -146,11 +148,18 @@ def main():
         if type(humidity) != float:
             humidity = prev_humidity
             temperature = prev_temperature
-        # print("getting weather")
+        
+        if first_run:
+            loader3_surface = font.render("getting weather forecast", True, (255, 255, 255))
+            screen.blit(loader3_surface)
+            pygame.display.update()
+        
+        # get weather forecast 
         widget_image = weather.fetch_weather_widget()
-        # print("updating screen")
+        # update screen
         if widget_image:
             update_display(temperature, humidity, widget_image)
+            
         first_run = False
         time.sleep(20)  # Change background every 20 seconds
 
