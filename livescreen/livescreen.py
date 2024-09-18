@@ -3,6 +3,7 @@ import os
 import time
 import re
 import random
+import numpy as np
 
 import todaydie # today die script
 import prediction # get metaculus and manifold predictions
@@ -47,13 +48,21 @@ def update_display(temperature, humidity, widget_image):
     background = pygame.image.load(image_path)
     background = pygame.transform.scale(background, (info.current_w, info.current_h))
     # display background
-    screen.blit(background, (0, 0))
+    # screen.blit(background, (0, 0))
 
     # nice background graphics
     overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
     overlay_image = pygame.image.load(overlay_path) # 1920x1080
+    # screen.blit(overlay_image, (0, 0), special_flags=pygame.BLEND_ADD) # position of die image
 
-    screen.blit(overlay_image, (0, 0), special_flags=pygame.BLEND_ADD) # position of die image
+    # screen blending mode 
+    background_array = pygame.surfarray.pixels3d(background).astype(np.uint16)
+    overlay_array = pygame.surfarray.pixels3d(overlay_image).astype(np.uint16)
+
+    screen_blend_array = 255 - ((255 - background_array) * (255 - overlay_array) // 255)
+    blended_surface = pygame.surfarray.make_surface(screen_blend_array.astype(np.uint8))
+    screen.blit(blended_surface, (0, 0))
+
     
     # Create a surface for the semi-transparent box
     box_surface = pygame.Surface((info.current_w, info.current_h), pygame.SRCALPHA)
