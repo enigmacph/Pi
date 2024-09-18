@@ -12,6 +12,71 @@ import weather # get yr weather forecast
 import Adafruit_DHT
 import time
 
+# list of loading sentences
+loading_messages = [
+    "Honeypotting diplomats and blackmailing them for seed funding...",
+    "Synthesizing the perfect algorithm to predict the coffee machine's next breakdown...",
+    "Negotiating with the CPU for extra processing power...",
+    "Redirecting background radiation to speed up downloads...",
+    "Calibrating the sensors to detect extraterrestrial Wi-Fi...",
+    "Reconfiguring the air molecules for optimized signal strength...",
+    "Persuading the RAM to remember what it forgot...",
+    "Scanning nearby devices for spontaneous cooperation...",
+    "Fine-tuning the weather predictions with dark magic and machine learning...",
+    "Running secret negotiations with nearby IoT devices for faster boot times...",
+    "Checking with the NSA if it’s okay to continue...",
+    "Harnessing Wi-Fi from the neighbor's router (just kidding)...",
+    "Optimizing time travel algorithms to reduce boot lag...",
+    "Bribing the CPU with extra voltage for faster responses...",
+    "Running background checks on nearby Bluetooth devices...",
+    "Convincing electrons to follow the speed limit...",
+    "Borrowing spare bandwidth from your fridge...",
+    "Aligning magnetic fields for better performance...",
+    "Consulting ancient schematics for optimal efficiency...",
+    "Extracting meaning from random data spikes...",
+    "Negotiating peace between rival bits and bytes...",
+    "Adjusting atmospheric conditions for smoother cloud sync...",
+    "Calibrating sensors to detect Wi-Fi ghosts...",
+    "Soliciting feedback from the air conditioner on network speed...",
+    "Optimizing bits for inter-dimensional travel...",
+    "Running a simulated conversation with the router for better signal...",
+    "Consulting a higher AI on the meaning of lag...",
+    "Recalibrating the quantum flux capacitor...",
+    "Diverting unused electrons to the graphics card...",
+    "Running diagnostics on virtual memory after last night’s data party...",
+    "Recruiting additional processes from alternate timelines...",
+    "Enabling top-secret hyper-threading mode...",
+    "Attempting to decode the encrypted language of plants...",
+    "Summoning extra bandwidth from an unknown realm...",
+    "Running anti-lag algorithms powered by hope and optimism...",
+    "Analyzing Wi-Fi signal for signs of sentient life...",
+    "Engaging in a staring contest with the CPU—stand by...",
+    "Redirecting excess processing power to world domination... just kidding!",
+    "Talking your router through some trust issues...",
+    "Running a background check on the incoming data...",
+    "Optimizing the speed of light for faster boot times...",
+    "Scouting the local network for rogue devices...",
+    "Optimizing packet delivery with caffeine-fueled algorithms...",
+    "Rewriting local laws of physics to favor faster connections...",
+    "Generating random but believable excuses for the delay...",
+    "Fine-tuning quantum fluctuations for peak performance...",
+    "Running deep scans for hidden performance bugs...",
+    "Outsourcing computation to a highly skilled ant colony...",
+    "Negotiating a ceasefire between competing processes...",
+    "Running an audit of system processes... none were harmed (yet)...",
+    "Gently persuading stubborn packets to cross the network...",
+    "Unlocking the secrets of quantum entanglement for faster load times...",
+    "Bribing the power supply for a little extra juice...",
+    "Consulting the weather satellite for boot-time optimization...",
+    "Recruiting a squirrel to speed up background processes...",
+    "Optimizing airflow around the CPU for cooler thoughts...",
+    "Convincing the hard drive to forget embarrassing files...",
+    "Redirecting solar flares for a faster data sync...",
+    "Running an internal investigation into lost packets...",
+    "Engaging stealth mode to quietly finish loading...",
+    "Teaching the GPU the meaning of humility before finalizing load..."
+]
+
 ## Initialize humidity sensor
 # Set sensor type : Options are DHT11, DHT22 or AM2302
 sensor = Adafruit_DHT.DHT11
@@ -173,7 +238,8 @@ def main():
             # print("updated weather forecast")
 
         if first_run:
-            loader3_surface = font.render("Honeypotting diplomats and blackmailing them for seed funding...", True, (255, 255, 255))
+            lul = random.choice(loading_messages)
+            loader3_surface = font.render(lul, True, (255, 255, 255))
             screen.blit(loader3_surface, (5, 95))
             pygame.display.update()
             
