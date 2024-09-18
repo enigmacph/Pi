@@ -160,19 +160,21 @@ def main():
             loader3_surface = font.render("getting weather forecast...", True, (255, 255, 255))
             screen.blit(loader3_surface, (5, 65))
             pygame.display.update()
+            widget_image = weather.fetch_weather_widget()
         
         # get weather forecast
         current_time = time.time()
         if current_time - last_weather_update > weather_update_interval:
             widget_image = weather.fetch_weather_widget()
-            last_weather_update = time.time()
+            last_weather_update = current_time
 
         if first_run:
                     loader3_surface = font.render("loading all the fucking rest...", True, (255, 255, 255))
                     screen.blit(loader3_surface, (5, 95))
+                    pygame.display.update()
+                    
                     overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
                     overlay_image = pygame.image.load(overlay_path) # 1920x1080
-                    pygame.display.update()
 
         # update screen
         if widget_image:
