@@ -19,7 +19,6 @@ sensor = Adafruit_DHT.DHT11
 pin = 4  # Replace with the GPIO pin number you used (e.g., GPIO4 corresponds to pin 7)
 
 ## Initialize pygame
-first_run = True
 os.environ["DISPLAY"] = ":0" # set display
 pygame.init()
 info = pygame.display.Info() # get screen size
@@ -129,6 +128,7 @@ def update_display(temperature, humidity, widget_image):
     pygame.display.flip()
 
 def main():
+    first_run = True
     humidity = 0
     temperature = 0
     while True:
