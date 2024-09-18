@@ -52,8 +52,9 @@ def update_display(temperature, humidity, widget_image):
     # nice background graphics
     overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
     overlay_image = pygame.image.load(overlay_path) # 1920x1080
-    screen.blit(overlay_image, (0, 0)) # position of die image
 
+    screen.blit(overlay_image, (0, 0), special_flags=pygame.BLEND_ADD) # position of die image
+    
     # Create a surface for the semi-transparent box
     box_surface = pygame.Surface((info.current_w, info.current_h), pygame.SRCALPHA)
 
@@ -134,9 +135,9 @@ def main():
     while True:
         if first_run:
             screen.fill((0,0,0)) # clear screen
-            loader1_surface = font.render("initializing...", True, (255, 255, 255))
+            loader1_surface = font.render("initializing the Orb of Truth...", True, (255, 255, 255))
             screen.blit(loader1_surface, (5, 5))
-            loader2_surface = font.render("getting temperature and humidity", True, (255, 255, 255))
+            loader2_surface = font.render("getting temperature and humidity...", True, (255, 255, 255))
             screen.blit(loader2_surface, (5, 35))
             pygame.display.flip()
 
@@ -150,12 +151,18 @@ def main():
             temperature = prev_temperature
         
         if first_run:
-            loader3_surface = font.render("getting weather forecast", True, (255, 255, 255))
-            screen.blit(loader3_surface, (5, 75))
+            loader3_surface = font.render("getting weather forecast...", True, (255, 255, 255))
+            screen.blit(loader3_surface, (5, 65))
             pygame.display.update()
         
         # get weather forecast 
         widget_image = weather.fetch_weather_widget()
+
+        if first_run:
+                    loader3_surface = font.render("loading all the fucking rest...", True, (255, 255, 255))
+                    screen.blit(loader3_surface, (5, 95))
+                    pygame.display.update()
+
         # update screen
         if widget_image:
             update_display(temperature, humidity, widget_image)
