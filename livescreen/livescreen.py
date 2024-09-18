@@ -161,8 +161,8 @@ def main():
             pygame.display.update()
             widget_image = weather.fetch_weather_widget()
             weather_widget = pygame.image.load(widget_image)
-            if weather_widget: 
-                print("got first weather widget")
+            # if weather_widget: 
+            #     print("got first weather widget")
         
         # get weather forecast
         current_time = time.time()
@@ -170,15 +170,15 @@ def main():
             widget_image = weather.fetch_weather_widget()
             weather_widget = pygame.image.load(widget_image) 
             last_weather_update = current_time
-            print("updated weather forecast")
+            # print("updated weather forecast")
 
         if first_run:
-                    loader3_surface = font.render("loading all the fucking rest...", True, (255, 255, 255))
-                    screen.blit(loader3_surface, (5, 95))
-                    pygame.display.update()
-                    
-                    overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
-                    overlay_image = pygame.image.load(overlay_path) # 1920x1080
+            loader3_surface = font.render("Honeypotting diplomats and blackmailing them for seed funding...", True, (255, 255, 255))
+            screen.blit(loader3_surface, (5, 95))
+            pygame.display.update()
+            
+            overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
+            overlay_image = pygame.image.load(overlay_path) # 1920x1080
 
         # update screen
         if widget_image:
