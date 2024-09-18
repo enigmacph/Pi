@@ -51,7 +51,7 @@ loading_messages = [
     "Running anti-lag algorithms powered by hope and optimism...",
     "Analyzing Wi-Fi signal for signs of sentient life...",
     "Engaging in a staring contest with the CPU—stand by...",
-    "Redirecting excess processing power to world domination... just kidding!",
+    "Redirecting excess processing power to world domination...",
     "Talking your router through some trust issues...",
     "Running a background check on the incoming data...",
     "Optimizing the speed of light for faster boot times...",
