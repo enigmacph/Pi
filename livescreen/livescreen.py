@@ -40,20 +40,13 @@ def get_next_image():
     images = [f for f in os.listdir(image_folder) if f.endswith(('jpg', 'png', 'jpeg'))]
     return os.path.join(image_folder, random.choice(images))
 
-def update_display(temperature, humidity, widget_image):
+def update_display(temperature, humidity, widget_image, overlay_image):
     screen.fill((0,0,0)) # clear screen
     
     # load background image
     image_path = get_next_image()
     background = pygame.image.load(image_path)
     background = pygame.transform.scale(background, (info.current_w, info.current_h))
-    # display background
-    # screen.blit(background, (0, 0))
-
-    # nice background graphics
-    overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
-    overlay_image = pygame.image.load(overlay_path) # 1920x1080
-    # screen.blit(overlay_image, (0, 0), special_flags=pygame.BLEND_ADD) # position of die image
 
     # screen blending mode 
     background_array = pygame.surfarray.pixels3d(background).astype(np.uint16)
@@ -62,7 +55,6 @@ def update_display(temperature, humidity, widget_image):
     screen_blend_array = 255 - ((255 - background_array) * (255 - overlay_array) // 255)
     blended_surface = pygame.surfarray.make_surface(screen_blend_array.astype(np.uint8))
     screen.blit(blended_surface, (0, 0))
-
     
     # Create a surface for the semi-transparent box
     box_surface = pygame.Surface((info.current_w, info.current_h), pygame.SRCALPHA)
@@ -141,6 +133,11 @@ def main():
     first_run = True
     humidity = 0
     temperature = 0
+
+    # control how often elements update
+    weather_update_interval = 3600 # only needs to update every hour
+    last_weather_update = time.time() 
+
     while True:
         if first_run:
             screen.fill((0,0,0)) # clear screen
@@ -164,17 +161,22 @@ def main():
             screen.blit(loader3_surface, (5, 65))
             pygame.display.update()
         
-        # get weather forecast 
-        widget_image = weather.fetch_weather_widget()
+        # get weather forecast
+        current_time = time.time()
+        if current_time - last_weather_update > weather_update_interval:
+            widget_image = weather.fetch_weather_widget()
+            last_weather_update = time.time()
 
         if first_run:
                     loader3_surface = font.render("loading all the fucking rest...", True, (255, 255, 255))
                     screen.blit(loader3_surface, (5, 95))
+                    overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
+                    overlay_image = pygame.image.load(overlay_path) # 1920x1080
                     pygame.display.update()
 
         # update screen
         if widget_image:
-            update_display(temperature, humidity, widget_image)
+            update_display(temperature, humidity, widget_image, overlay_image)
 
         first_run = False
         time.sleep(20)  # Change background every 20 seconds
