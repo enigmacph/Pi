@@ -1,21 +1,17 @@
 import pygame
 import os
 import time
-import requests
-# import Adafruit_DHT
-import cairosvg
-import io
 import re
 import random
 
-import todaydie
-import prediction
+import todaydie # today die script
+import prediction # get metaculus and manifold predictions
+import weather # get yr weather forecast
 
 import Adafruit_DHT
 import time
 
 ## Initialize humidity sensor
-
 # Set sensor type : Options are DHT11, DHT22 or AM2302
 sensor = Adafruit_DHT.DHT11
 
@@ -23,6 +19,7 @@ sensor = Adafruit_DHT.DHT11
 pin = 4  # Replace with the GPIO pin number you used (e.g., GPIO4 corresponds to pin 7)
 
 ## Initialize pygame
+first_run = True
 os.environ["DISPLAY"] = ":0" # set display
 pygame.init()
 info = pygame.display.Info() # get screen size
@@ -43,47 +40,20 @@ def get_next_image():
     images = [f for f in os.listdir(image_folder) if f.endswith(('jpg', 'png', 'jpeg'))]
     return os.path.join(image_folder, random.choice(images))
 
-def sanitize_svg(svg_content):
-    # Remove or correct the problematic float value
-    sanitized_svg = re.sub(r"(\d+\.\d+)(r)", r"\1", svg_content.decode('utf-8'))
-    return sanitized_svg.encode('utf-8')
-
-def fetch_weather_widget():
-    widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?mode=dark"  # copenhagen dark mode svg
-    # widget_url = "https://www.yr.no/en/content/2-2618425/meteogram.svg?"  # not dark mode lol
-
-    response = requests.get(widget_url)
-    
-    if response.status_code == 200:
-        # Convert SVG to PNG in memory
-        try:
-            svg_data = sanitize_svg(response.content)
-            # print("GOT TO HERE")
-            png_data = cairosvg.svg2png(bytestring=svg_data)
-            
-            # Load the PNG data into a Pygame surface or return it
-            png_image = io.BytesIO(png_data)
-            return png_image  # Return a BytesIO object containing the PNG data
-        except Exception as e:
-            print(f"Error converting SVG to PNG: {e}")
-            return None
-    else:
-        print(f"Error fetching SVG: HTTP {response.status_code}")
-        return None
-
 def update_display(temperature, humidity, widget_image):
     screen.fill((0,0,0)) # clear screen
     
-    # Load and display background image
+    # load background image
     image_path = get_next_image()
     background = pygame.image.load(image_path)
     background = pygame.transform.scale(background, (info.current_w, info.current_h))
+    # display background
     screen.blit(background, (0, 0))
 
     # nice background graphics
     overlay_path = "/home/pi/Python/Pi/livescreen/overlay.png"
     overlay_image = pygame.image.load(overlay_path) # 1920x1080
-    screen.blit(overlay_image, (0, 0), special_flags="BLEND_ADD") # position of die image - add blending mode
+    screen.blit(overlay_image, (0, 0)) # position of die image
 
     # Create a surface for the semi-transparent box
     box_surface = pygame.Surface((info.current_w, info.current_h), pygame.SRCALPHA)
@@ -97,9 +67,6 @@ def update_display(temperature, humidity, widget_image):
 
     temp_hum_box = temp_hum_surface.get_rect(topleft=(400, info.current_h - 40)) # Temperature and humidity box : dimensions = 464x27
     pygame.draw.rect(box_surface, box_color, temp_hum_box.inflate(20, 20)) # 484x47
-
-    # screen.blit(box_surface, (0,0)) # blit box under text onto main screen
-    # screen.blit(temp_hum_surface, temp_hum_box.topleft)
 
     # Today's die text and box
     die = todaydie.die_check() # generate today roll from using date as seed
@@ -159,12 +126,20 @@ def update_display(temperature, humidity, widget_image):
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
     screen.blit(weather_widget, (info.current_w - 902, info.current_h - 210))  # Position on the screen
 
+    # blit everything at the end
+
+    first_run = False # indicate we are up and running
     pygame.display.flip()
 
 def main():
     humidity = 0
     temperature = 0
     while True:
+        if first_run:
+            screen.fill((0,0,0)) # clear screen
+            loader_surface = font.render("loading...", True, (255, 255, 255))
+            screen.blit(loader_surface, (10, 10))
+            pygame.display.flip()
         # print("now we are here")
         prev_humidity = humidity
         prev_temperature = temperature
@@ -175,12 +150,12 @@ def main():
             humidity = prev_humidity
             temperature = prev_temperature
         # print("getting weather")
-        widget_image = fetch_weather_widget()
-        # print("updating screen")        
+        widget_image = weather.fetch_weather_widget()
+        # print("updating screen")
         if widget_image:
             update_display(temperature, humidity, widget_image)
 
-        time.sleep(10)  # Change background every 60 seconds
+        time.sleep(20)  # Change background every 20 seconds
 
 if __name__ == "__main__":
     main()
