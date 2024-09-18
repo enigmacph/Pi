@@ -54,6 +54,7 @@ def update_display(temperature, humidity, weather_widget, overlay_image):
 
     screen_blend_array = 255 - ((255 - background_array) * (255 - overlay_array) // 255)
     blended_surface = pygame.surfarray.make_surface(screen_blend_array.astype(np.uint8))
+    blended_surface.set_alpha(230) # 230 = 90% of 255
     screen.blit(blended_surface, (0, 0))
     
     # Create a surface for the semi-transparent box
@@ -112,6 +113,7 @@ def update_display(temperature, humidity, weather_widget, overlay_image):
     die_image_path = "/home/pi/Python/Pi/livescreen/d20.png"
     die_image = pygame.image.load(die_image_path)
     die_image = pygame.transform.scale(die_image, (150, 150)) # resize from 400x400 to 150x150
+    die_image.set_alpha(230) # 230 = 90% of 255
     screen.blit(die_image, (0, info.current_h - 185)) # position of die image
 
     # weather_widget = weather_widget
