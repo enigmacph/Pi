@@ -25,7 +25,7 @@ loading_messages = [
     "Fine-tuning the weather predictions with dark magic and machine learning...",
     "Running secret negotiations with nearby IoT devices for faster boot times...",
     "Checking with the NSA if it’s okay to continue...",
-    "Harnessing Wi-Fi from the neighbor's router (just kidding)...",
+    "Harnessing Wi-Fi from the neighbor's router...",
     "Optimizing time travel algorithms to reduce boot lag...",
     "Bribing the CPU with extra voltage for faster responses...",
     "Running background checks on nearby Bluetooth devices...",
