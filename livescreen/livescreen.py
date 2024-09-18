@@ -114,8 +114,7 @@ def update_display(temperature, humidity, widget_image, overlay_image):
     die_image = pygame.transform.scale(die_image, (150, 150)) # resize from 400x400 to 150x150
     screen.blit(die_image, (0, info.current_h - 185)) # position of die image
 
-    # adding weather widget from YR.no
-    weather_widget = pygame.image.load(widget_image) # Load and display the weather widget image 
+    # weather_widget = weather_widget
 
     # crop top and bottom of image
     crop_rect = pygame.Rect(0, 86, 782, 176)  # crop to 782x179 - Define the cropping rectangle (left, top, width, height)
@@ -161,11 +160,13 @@ def main():
             screen.blit(loader3_surface, (5, 65))
             pygame.display.update()
             widget_image = weather.fetch_weather_widget()
+            weather_widget = pygame.image.load(widget_image) 
         
         # get weather forecast
         current_time = time.time()
         if current_time - last_weather_update > weather_update_interval:
             widget_image = weather.fetch_weather_widget()
+            weather_widget = pygame.image.load(widget_image) 
             last_weather_update = current_time
 
         if first_run:
@@ -178,7 +179,7 @@ def main():
 
         # update screen
         if widget_image:
-            update_display(temperature, humidity, widget_image, overlay_image)
+            update_display(temperature, humidity, weather_widget, overlay_image)
 
         first_run = False
         time.sleep(20)  # Change background every 20 seconds
