@@ -110,7 +110,7 @@ def update_display(temperature, humidity, weather_widget, overlay_image):
     
     # load background image
     image_path = get_next_image()
-    background = pygame.image.load(image_path)
+    background = pygame.image.load(image_path).convert_alpha()
     background = pygame.transform.scale(background, (info.current_w, info.current_h))
 
     # screen blending mode 
@@ -227,7 +227,7 @@ def main():
             screen.blit(loader3_surface, (5, 65))
             pygame.display.update()
             widget_image = weather.fetch_weather_widget()
-            weather_widget = pygame.image.load(widget_image)
+            weather_widget = pygame.image.load(widget_image).convert_alpha()
             # if weather_widget: 
             #     print("got first weather widget")
         
@@ -235,7 +235,7 @@ def main():
         current_time = time.time()
         if current_time - last_weather_update > weather_update_interval:
             widget_image = weather.fetch_weather_widget()
-            weather_widget = pygame.image.load(widget_image) 
+            weather_widget = pygame.image.load(widget_image).convert_alpha()
             last_weather_update = current_time
             # print("updated weather forecast")
 
