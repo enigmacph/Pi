@@ -40,7 +40,7 @@ def get_next_image():
     images = [f for f in os.listdir(image_folder) if f.endswith(('jpg', 'png', 'jpeg'))]
     return os.path.join(image_folder, random.choice(images))
 
-def update_display(temperature, humidity, widget_image, overlay_image):
+def update_display(temperature, humidity, weather_widget, overlay_image):
     screen.fill((0,0,0)) # clear screen
     
     # load background image
