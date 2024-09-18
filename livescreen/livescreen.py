@@ -126,9 +126,6 @@ def update_display(temperature, humidity, widget_image):
     weather_widget = pygame.transform.scale(cropped_widget, (892, 200))  # Resize
     screen.blit(weather_widget, (info.current_w - 902, info.current_h - 210))  # Position on the screen
 
-    # blit everything at the end
-
-    first_run = False # indicate we are up and running
     pygame.display.flip()
 
 def main():
@@ -140,7 +137,7 @@ def main():
             loader_surface = font.render("loading...", True, (255, 255, 255))
             screen.blit(loader_surface, (10, 10))
             pygame.display.flip()
-        # print("now we are here")
+
         prev_humidity = humidity
         prev_temperature = temperature
 
@@ -154,7 +151,7 @@ def main():
         # print("updating screen")
         if widget_image:
             update_display(temperature, humidity, widget_image)
-
+        first_run = False
         time.sleep(20)  # Change background every 20 seconds
 
 if __name__ == "__main__":
