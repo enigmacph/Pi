@@ -146,7 +146,7 @@ def update_display(temperature, humidity, weather_widget, overlay_image):
     # getting prediction market result
     current_prediction_text = prediction.pick_random_prediction()
 
-    if len(current_prediction_text):
+    if len(current_prediction_text) > 0:
         prediction_market_text = current_prediction_text[0]
         prediction_question_text = current_prediction_text[1]
         prediction_question_text = re.sub(r'[^\u0000-\uFFFF]', '', prediction_question_text) # remove emojis from prediction questions
