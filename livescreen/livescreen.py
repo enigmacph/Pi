@@ -146,10 +146,15 @@ def update_display(temperature, humidity, weather_widget, overlay_image):
     # getting prediction market result
     current_prediction_text = prediction.pick_random_prediction()
 
-    prediction_market_text = current_prediction_text[0]
-    prediction_question_text = current_prediction_text[1]
-    prediction_question_text = re.sub(r'[^\u0000-\uFFFF]', '', prediction_question_text) # remove emojis from prediction questions
-    prediction_percent_text = current_prediction_text[2]
+    if current_prediction_text:
+        prediction_market_text = current_prediction_text[0]
+        prediction_question_text = current_prediction_text[1]
+        prediction_question_text = re.sub(r'[^\u0000-\uFFFF]', '', prediction_question_text) # remove emojis from prediction questions
+        prediction_percent_text = current_prediction_text[2]
+    else:
+        prediction_market_text = ""
+        prediction_question_text = "no market updates since yesterday"
+        prediction_percent_text = ""
     
     # adding market
     prediction_m_surface = font.render(prediction_market_text, True, (255, 255, 255))
