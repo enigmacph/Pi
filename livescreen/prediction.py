@@ -13,9 +13,10 @@ def get_predictions():
         # Extract market movements from manifold and metaculus, adding the source key
         market_movements_manifold = [{"source": "manifold", **item} for item in data["manifold"]]
         market_movements_metaculus = [{"source": "metaculus", **item} for item in data["metaculus"]]
+        market_movements_kalshi = [{"source": "kalshi", **item} for item in data["kalshi"]]
 
         # Concatenate results from manifold and metaculus
-        market_movements = market_movements_manifold + market_movements_metaculus 
+        market_movements = market_movements_manifold + market_movements_metaculus + market_movements_kalshi
 
     return market_movements
 
