@@ -40,11 +40,14 @@ def pick_random_prediction():
 
     # Convert probabilities to percentages, if they are numerical
     if isinstance(previous_prob, (int, float)) and isinstance(new_prob, (int, float)):
-        previous_prob = f"{previous_prob * 100:.2f}%"
-        new_prob = f"{new_prob * 100:.2f}%"
-    else:
-        previous_prob = "Unknown previous probability"
-        new_prob = "Unknown new probability"
+        # Check if the probabilities are already given as percentages (greater than 1)
+        if previous_prob <= 1 and new_prob <= 1:
+            previous_prob = f"{previous_prob * 100:.2f}%"
+            new_prob = f"{new_prob * 100:.2f}%"
+        else:
+            # Assume the probabilities are already in percentage form and just format them
+            previous_prob = f"{previous_prob:.2f}%"
+            new_prob = f"{new_prob:.2f}%"
 
     # Return a list containing the source, question, and probabilities
     result = [f"Market: {source}", f"{question}", f"{previous_prob} -> {new_prob}"]
