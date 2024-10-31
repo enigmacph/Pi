@@ -1,80 +1,91 @@
 import time
-import gdown
 import os
-import subprocess
 import random
 import pygame
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from googleapiclient.http import MediaIoBaseDownload
 
-# Set your Google Drive folder URL and the destination folder path on your Raspberry Pi
-drive_folder_url = 'https://drive.google.com/drive/u/3/folders/1X2sYmeSK85W6ePTTju_pdw2-E2fwRvzx'  # Replace YOUR_FOLDER_ID with your folder ID
-destination_folder = "/home/pi/photos"  # Replace this with the folder path where you want the image to be saved
+# Set your Google Drive folder ID and the destination folder path on your Raspberry Pi
+FOLDER_ID = '1X2sYmeSK85W6ePTTju_pdw2-E2fwRvzx'
+DESTINATION_FOLDER = "/home/pi/photos"
+# DESTINATION_FOLDER = "C:/Users/magnu/OneDrive/Dokumenter/EnigmA/photos/" # testing folder for Magnus
 
-## Initialize pygame
-os.environ["DISPLAY"] = ":0" # set display
+# Initialize Pygame for displaying images
+os.environ["DISPLAY"] = ":0"  # Set display for the Raspberry Pi
 pygame.init()
-info = pygame.display.Info() # get screen size
-screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+info = pygame.display.Info()  # Get screen size
+screen = pygame.display.set_mode((info.current_w, info.current_h), pygame.FULLSCREEN)
 pygame.mouse.set_visible(False)  # Hide the mouse cursor
 
-# Function to extract the file IDs from the folder
-def get_file_ids(folder_url):
-    # Use gdown to list the contents of the folder
-    command = ['gdown', '--folder', folder_url, '--quiet']
-    result = subprocess.run(command, capture_output=True, text=True)
-    file_ids = []
-    
-    # Parse the file IDs from the output
-    for line in result.stdout.splitlines():
-        if line.startswith('file'):
-            file_id = line.split()[1]  # Get the file ID from the list output
-            file_ids.append(file_id)
-    
-    return file_ids
+def authenticate_google_drive():
+    try:
+        # Authenticate using the service account file
+        creds = service_account.Credentials.from_service_account_file(
+            'symposium/credentials.json', scopes=['https://www.googleapis.com/auth/drive']
+        )
+        service = build('drive', 'v3', credentials=creds)
+        return service
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        return None
 
-# Function to download a random image
-def download_random_image(folder_url, destination_folder):
-    file_ids = get_file_ids(folder_url)
-    
+def list_files_in_folder(service, folder_id):
+    try:
+        query = f"'{folder_id}' in parents and trashed = false"
+        results = service.files().list(
+            q=query, fields="files(id, name)").execute()
+        items = results.get('files', [])
+        file_ids = [item['id'] for item in items]
+        return file_ids
+    except HttpError as error:
+        print(f"An error occurred while listing files: {error}")
+        return []
+
+def download_random_image(service, file_ids, destination_folder):
     if not file_ids:
         print("No images found in the folder.")
         return
-
-    # Pick a random file ID
     random_file_id = random.choice(file_ids)
-    
-    # Set the download URL for the selected file
-    file_url = f'https://drive.google.com/uc?id={random_file_id}&export=download'
-    
-    # Download the image
+    request = service.files().get_media(fileId=random_file_id)
     output_path = os.path.join(destination_folder, 'photo.jpg')
-    
+
     # Remove the existing 'photo.jpg' if it exists
     if os.path.exists(output_path):
         os.remove(output_path)
-    
-    # Download the new image
-    gdown.download(file_url, output_path, quiet=False)
-    print(f"Downloaded and saved as {output_path}")
+
+    # Download the image
+    with open(output_path, "wb") as fh:
+        downloader = MediaIoBaseDownload(fh, request)
+        done = False
+        while not done:
+            status, done = downloader.next_chunk()
+            print(f"Download {int(status.progress() * 100)}%.")
+    print(f"Downloaded image as {output_path}")
 
 def update_display():
-    screen.fill((0,0,0)) # clear screen
-    background = pygame.image.load("/home/pi/photos/photo.jpg").convert_alpha()
-    screen.blit(background, (0,0))
+    screen.fill((0, 0, 0))  # Clear screen
+    background = pygame.image.load(os.path.join(DESTINATION_FOLDER, 'photo.jpg')).convert_alpha()
+    screen.blit(background, (0, 0))
     pygame.display.flip()
 
 def main():
-    while True: 
-        # get picture
-        print('downloading image')
-        download_random_image(drive_folder_url, destination_folder)
-        
-        # show picture
-        print("showing image")
-        update_display()
+    service = authenticate_google_drive()
+    if not service:
+        print("Failed to authenticate. Exiting.")
+        return
+    
+    # Get list of image IDs
+    file_ids = list_files_in_folder(service, FOLDER_ID)
+    if not file_ids:
+        print("No files found in Google Drive folder.")
+        return
 
-        # wait for some time
-        print("sleeping")
-        time.sleep(1)
+    while True:
+        download_random_image(service, file_ids, DESTINATION_FOLDER)
+        update_display()
+        time.sleep(300)  # Wait for 5 minutes
 
 if __name__ == "__main__":
     main()
