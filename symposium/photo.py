@@ -23,7 +23,7 @@ def authenticate_google_drive():
     try:
         # Authenticate using the service account file
         creds = service_account.Credentials.from_service_account_file(
-            '/home/pi/Python/Pi/livescreen/symposium/credentials.json', scopes=['https://www.googleapis.com/auth/drive']
+            'credentials.json', scopes=['https://www.googleapis.com/auth/drive'] #/home/pi/Python/Pi/livescreen/symposium/
         )
         service = build('drive', 'v3', credentials=creds)
         return service
