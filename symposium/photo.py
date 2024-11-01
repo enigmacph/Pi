@@ -8,7 +8,8 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaIoBaseDownload
 
 # Set your Google Drive folder ID and the destination folder path on your Raspberry Pi
-FOLDER_ID = '1X2sYmeSK85W6ePTTju_pdw2-E2fwRvzx'
+# old FOLDER_ID = '1X2sYmeSK85W6ePTTju_pdw2-E2fwRvzx'
+FOLDER_ID = "15AAQCufhvAWa-JDOIMc0oxOqD9VN7a_2CZgdV8qz2cTHnzrvHSdFRM1v51HdZoewW75dRg10"
 DESTINATION_FOLDER = "/home/pi/photos"
 # DESTINATION_FOLDER = "C:/Users/magnu/OneDrive/Dokumenter/EnigmA/photos/" # testing folder for Magnus
 
@@ -106,7 +107,7 @@ def main():
     while True:
         download_random_image(service, file_ids, DESTINATION_FOLDER)
         update_display()
-        time.sleep(300)  # Wait for 5 minutes
+        time.sleep(10)  # Wait for # seconds
 
 if __name__ == "__main__":
     main()
