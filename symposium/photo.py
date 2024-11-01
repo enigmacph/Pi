@@ -98,13 +98,13 @@ def main():
         print("Failed to authenticate. Exiting.")
         return
     
-    # Get list of image IDs
-    file_ids = list_files_in_folder(service, FOLDER_ID)
-    if not file_ids:
-        print("No files found in Google Drive folder.")
-        return
-
     while True:
+        # Get list of image IDs
+        file_ids = list_files_in_folder(service, FOLDER_ID)
+        if not file_ids:
+            print("No files found in Google Drive folder.")
+            return
+
         download_random_image(service, file_ids, DESTINATION_FOLDER)
         update_display()
         time.sleep(10)  # Wait for # seconds
