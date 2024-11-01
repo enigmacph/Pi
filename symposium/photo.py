@@ -67,18 +67,27 @@ def download_random_image(service, file_ids, destination_folder):
 def update_display():
     screen.fill((0, 0, 0))  # Clear screen
 
-    # Load and prepare the image
+    # Load the image
     background = pygame.image.load(os.path.join(DESTINATION_FOLDER, 'photo.jpg')).convert_alpha()
-    
-    # Get dimensions for centering
     img_width, img_height = background.get_size()
     screen_width, screen_height = screen.get_size()
 
-    # Calculate x position to center the image horizontally
-    x_pos = (screen_width - img_width) // 2
-    y_pos = (screen_height - img_height) // 2  # Center vertically too if screen height > image height
+    # Calculate scaling to fit the screen
+    scale_factor = min(screen_width / img_width, screen_height / img_height)
 
-    # Blit the image to the screen centered horizontally
+    # Scale the image if it's larger than the screen
+    if scale_factor < 1:
+        new_width = int(img_width * scale_factor)
+        new_height = int(img_height * scale_factor)
+        background = pygame.transform.smoothscale(background, (new_width, new_height))
+    else:
+        new_width, new_height = img_width, img_height  # No scaling needed
+
+    # Calculate position to center the image
+    x_pos = (screen_width - new_width) // 2
+    y_pos = (screen_height - new_height) // 2
+
+    # Blit the image to the screen centered
     screen.blit(background, (x_pos, y_pos))
     pygame.display.flip()
 
