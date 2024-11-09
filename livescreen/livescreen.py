@@ -239,9 +239,12 @@ def main():
         # get weather forecast
         current_time = time.time()
         if current_time - last_weather_update > weather_update_interval:
-            widget_image = weather.fetch_weather_widget()
-            weather_widget = pygame.image.load(widget_image).convert_alpha()
-            last_weather_update = current_time
+            try:
+                widget_image = weather.fetch_weather_widget()
+                weather_widget = pygame.image.load(widget_image).convert_alpha()
+                last_weather_update = current_time
+            except Exception as e:
+                print(e)
             # print("updated weather forecast")
 
         if first_run:
